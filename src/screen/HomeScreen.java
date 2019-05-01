@@ -2,11 +2,13 @@ package screen;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 
 import main.GameMain;
@@ -22,6 +24,7 @@ public class HomeScreen extends JPanel{
 		this.gameFrame=gameFrame;
 		this.buttons = new ArrayList<JButton>();
 		defaultButtonLayout();
+		this.setPreferredSize(new Dimension(1280,720));
 	}
 	
 	private void defaultButtonLayout(){
@@ -36,8 +39,7 @@ public class HomeScreen extends JPanel{
 		});
 		this.buttons.add(playButton);
 	}
-	
-	
+		
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		g.setColor(backgroundColor);
@@ -46,7 +48,5 @@ public class HomeScreen extends JPanel{
 			this.add(b,BorderLayout.CENTER);
 		}
 	}	
-	
-	
-	
+
 }

@@ -1,0 +1,14 @@
+backgroundColor=
+backgroundImage=
+Hero(xpos, ypos, speed)
+enemies{
+    enemy(xpos, ypos, type)
+    enemy()
+    enemy()
+
+}
+obstacles{
+    obstacleColor=
+    obstacleImage=
+    obstacle(xpos, ypos, width, height)
+}

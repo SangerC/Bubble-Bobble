@@ -20,7 +20,7 @@ public class GameMain {
 	
 	public void newGame() {
 		gameFrame.removeAll();
-		this.level=new Level();
+		this.level=new Level("/home/cullen/Projects/CSSE220/bubbleBobble/arcade-game-arcade-28/levels/level0/level0");
 		gameFrame.add(level,BorderLayout.CENTER);
 		gameFrame.repaint();
 	}

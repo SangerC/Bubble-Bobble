@@ -1,0 +1,11 @@
+backgroundColor=255,246,0
+backgroundImage=/levels/level0/TimWilson.jpg
+Hero(25, 690, 2)
+enemies{
+    enemy(400, 200, inquisitor)
+}
+obstacles{
+    obstacleColor=Color.CYAN
+    obstacleImage=
+    obstacle(660, 800, 25, 5)
+}
