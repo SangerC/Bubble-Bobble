@@ -1,11 +1,11 @@
-backgroundColor=255,246,0
-backgroundImage=/levels/level0/TimWilson.jpg
-Hero(25, 690, 2)
+backgroundColor=255,246,0;
+backgroundImage=/home/cullen/Projects/CSSE220/bubbleBobble/arcade-game-arcade-28/levels/level0/TimWilson.jpg;
+Hero(25,690,2);
 enemies{
-    enemy(400, 200, inquisitor)
+    enemy(400, 200, inquisitor);
 }
 obstacles{
-    obstacleColor=Color.CYAN
-    obstacleImage=
-    obstacle(660, 800, 25, 5)
+    obstacleColor=Color.CYAN;
+    obstacleImage=;
+    obstacle(660, 800, 25, 5);
 }

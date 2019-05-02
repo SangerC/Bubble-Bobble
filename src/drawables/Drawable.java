@@ -2,8 +2,8 @@ package drawables;
 
 public abstract class Drawable {
 
-	private double x;
-	private double y;
+	protected double x;
+	protected double y;
 	
 	
 	public Drawable(double x, double y) {
@@ -20,8 +20,11 @@ public abstract class Drawable {
 	public void remove() {
 		
 	}
-	public abstract void update();
-	
-	
-	
+	public abstract void update();	
+	public double getX() {
+		return x;
+	}
+	public double getY() {
+		return this.y;
+	}
 }
