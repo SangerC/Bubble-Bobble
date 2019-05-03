@@ -13,17 +13,17 @@ public class HeroListener implements KeyListener{
 	}
 	
 	@Override
-	public void keyPressed(KeyEvent arg0) {
+	public void keyPressed(KeyEvent arg0){
 		hero.setKeyPressed(arg0.getKeyCode());
 	}
 
 	@Override
-	public void keyReleased(KeyEvent arg0) {
+	public void keyReleased(KeyEvent arg0){
 		hero.setKeyPressed(0);
 	}
 
 	@Override
-	public void keyTyped(KeyEvent arg0) {
+	public void keyTyped(KeyEvent arg0){
 		
 	}
 

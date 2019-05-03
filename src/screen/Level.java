@@ -36,23 +36,21 @@ public class Level extends JPanel{
 		while(s.hasNext()) {
 			String line = s.next();
 			if(line.contains("backgroundColor")) {
-				int r;
-				int b;
-				int g;
-				String setting = readEquivalent(line);
-				r=Integer.valueOf(readParameter(setting,0));
-				g=Integer.valueOf(readParameter(setting,1));
-				b=Integer.valueOf(readParameter(setting,2));
+				String setting = readAfter(line,'=');
+				int r=Integer.valueOf(readParameter(setting,0));
+				int g=Integer.valueOf(readParameter(setting,1));
+				int b=Integer.valueOf(readParameter(setting,2));
 				this.backgroundColor = new Color(r,g,b);
 			}
 			else if(line.contains("backgroundImage")){
 				Toolkit toolkit = Toolkit.getDefaultToolkit();
-				this.backgroundImage = toolkit.getImage(readEquivalent(line));
+				this.backgroundImage = toolkit.getImage(readAfter(line,'='));
 			}
 			else if(line.contains("Hero")){
-				this.hero = new Hero(Double.valueOf(readParameter(line.substring(5,line.length()),0)),
-									 Double.valueOf(readParameter(line.substring(5,line.length()),1)),
-									 Double.valueOf(readParameter(line.substring(5,line.length()),2)));
+				String setting = readAfter(line,'(');
+				this.hero = new Hero(Double.valueOf(readParameter(setting,0)),
+									 Double.valueOf(readParameter(setting,1)),
+									 Double.valueOf(readParameter(setting,2)));
 			}
 			
 			
@@ -60,15 +58,10 @@ public class Level extends JPanel{
 		
 	}
 	
-	public String readEquivalent(String line){
+	public String readAfter(String line, char marker){
 		for(int i=0;i<line.length();i++){
-			if(line.charAt(i)=='='){
-				if(line.contains(",")) {
-					return line.substring(i+1,line.length());
-				}
-				else {
-					return line.substring(i+1,line.length()-1);
-				}
+			if(line.charAt(i)==marker){
+				return line.substring(i+1,line.length());
 			}
 		}
 		return null;
