@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.Button;
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.File;
@@ -69,6 +70,7 @@ public class Level extends JPanel{
 		
 		
 		this.setBackground(backgroundColor);
+		this.repaint();
 	}
 	
 	public String readAfter(String line, char marker){
@@ -93,7 +95,9 @@ public class Level extends JPanel{
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
+		Graphics2D g2 = (Graphics2D) g;
 		g.drawImage(this.backgroundImage, 0, 0,this);
+		this.hero.draw(g2);
 	}	
 	public Hero getHero() {
 		return this.hero;

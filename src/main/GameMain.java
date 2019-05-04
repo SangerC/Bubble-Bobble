@@ -2,62 +2,122 @@ package main;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+
+import javax.swing.Timer;
 
 import screen.GameFrame;
 import screen.Level;
 
 public class GameMain {
 	
+	private static final int DELAY = 1;
+	private static final String levelDirectory = "levels/";
+	private static final int frameXSize = 1280;
+	private static final int frameYSize = 720;
 	private GameFrame gameFrame;
 	private Level level;
 	private HeroListener heroListener;
+	private int currentLevel;
 	private boolean running=false;
 	private boolean paused=false;
+	private Timer timer;
 
 	public GameMain(GameFrame gameFrame) {
 		this.gameFrame=gameFrame;
-		this.newGame();
-		//this.run();
+		this.newGame(0);
 	}
 
 	
 	
 	
-	public void newGame() {
+	public void newGame(int levelNumber) {
 		this.gameFrame.getContentPane().removeAll();
-		this.level=new Level("levels/level0/level0");
+		this.level=new Level(levelDirectory+"level"+levelNumber+"/level"+levelNumber);
 		this.level.setPreferredSize(new Dimension(1280,720));
 		this.gameFrame.add(this.level,BorderLayout.CENTER);
-		this.heroListener=new HeroListener(level.getHero());
+		this.currentLevel=levelNumber;
+		this.gameFrame.revalidate();
+		this.gameFrame.repaint();
+		this.heroListener=new HeroListener(level.getHero(),this);
 		this.gameFrame.addKeyListener(this.heroListener);
+		this.gameFrame.requestFocus();
+		run();
 	}
 	
-	
 	private void run(){
-		while(running) {
-			
-			
-			while(!paused){
+		this.timer = new Timer(DELAY, new GameListener(this));
+		this.timer.start();
+	}
+	
+	public void update() {
+		if(this.level.getHero().getX()>=frameXSize){
+			this.level.getHero().setX(0);
+		}
+		else if(this.level.getHero().getX()<=-40){
+			this.level.getHero().setX(frameXSize-20);
+		}
+	}	
+	
 
-				
-				
-			}
+	public void draw() {
+		this.level.repaint();
+	}
+	
+	public void nextLevel() {
+		if(this.currentLevel==getNumberOfLevels(levelDirectory)){
 			
-			
+		}
+		else{
+			this.currentLevel++;
+			newGame(this.currentLevel);
 		}
 	}
 	
+	public void previousLevel() {
+		if(this.currentLevel==0){
+			
+		}
+		else{
+			this.currentLevel--;
+			newGame(this.currentLevel);
+		}
+	}
 	
-	public void moveLevel(int levelNumber){
+	private int getNumberOfLevels(String dirPath){
+			int count = 0;
+		    File f = new File(dirPath);
+		    File[] files = f.listFiles();
+
+		    if (files != null)
+		    for (int i = 0; i < files.length; i++) {
+		        count++;
+		        File file = files[i];
+		    }
+		    return (count-2);
+	}
+	
+	public class GameListener implements ActionListener{
 		
+		private GameMain gameMain;
+		public GameListener(GameMain gameMain) {
+			this.gameMain=gameMain;
+		}
 		
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			this.gameMain.update();
+			this.gameMain.draw();
+		}
 		
 		
 		
 	}
-	
-	
-	
-	
-	
+
+	public void pause() {
+		this.paused=true;
+		this.timer.stop();
+	}
 }

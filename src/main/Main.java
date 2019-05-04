@@ -27,6 +27,8 @@ public class Main {
 		GameFrame gameFrame = new GameFrame();
 		JPanel homeScreen = new HomeScreen(gameFrame);
 		gameFrame.add(homeScreen,BorderLayout.CENTER);
+		gameFrame.revalidate();
+		gameFrame.repaint();
 	}
 
 	

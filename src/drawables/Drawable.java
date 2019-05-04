@@ -1,5 +1,7 @@
 package drawables;
 
+import java.awt.Graphics2D;
+
 public abstract class Drawable {
 
 	protected double x;
@@ -11,7 +13,7 @@ public abstract class Drawable {
 		this.y=y;
 	}
 	
-	public abstract void draw();
+	public abstract void draw(Graphics2D g2);
 	public void move(double x, double y) {
 		this.x=x;
 		this.y=y;
