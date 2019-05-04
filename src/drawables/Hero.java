@@ -29,5 +29,8 @@ public class Hero extends Character{
 	public void setKeyPressed(int keyCode) {
 		this.keyPressed=keyCode;
 	}
+	public int getKeyPressed() {
+		return this.keyPressed;
+	}
 
 }

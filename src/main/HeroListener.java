@@ -14,7 +14,8 @@ public class HeroListener implements KeyListener{
 	
 	@Override
 	public void keyPressed(KeyEvent arg0){
-		hero.setKeyPressed(arg0.getKeyCode());
+		System.out.println(arg0.getKeyCode());
+		this.hero.setKeyPressed(arg0.getKeyCode());
 	}
 
 	@Override

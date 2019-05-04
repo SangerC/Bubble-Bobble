@@ -1,6 +1,7 @@
 package screen;
 
 import java.awt.BorderLayout;
+import java.awt.Button;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -13,13 +14,16 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
 
 import drawables.Drawable;
+import drawables.Enemy;
 import drawables.Hero;
 
 public class Level extends JPanel{
 
+	private ArrayList<Enemy> enemies;
 	private ArrayList<Drawable> drawables;
 	private Color backgroundColor;
 	private Image backgroundImage;
@@ -57,6 +61,14 @@ public class Level extends JPanel{
 			
 		}		
 		
+		
+		
+		
+		
+		
+		
+		
+		this.setBackground(backgroundColor);
 	}
 	
 	public String readAfter(String line, char marker){
@@ -78,12 +90,11 @@ public class Level extends JPanel{
 		}
 		return null;
 	}
+	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
-		g.setColor(backgroundColor);
-		g.fillRect(0,0,1280,720);
-		g.drawImage(backgroundImage, 0, 0,this);
-	}
+		g.drawImage(this.backgroundImage, 0, 0,this);
+	}	
 	public Hero getHero() {
 		return this.hero;
 	}
