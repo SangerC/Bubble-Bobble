@@ -4,7 +4,6 @@ enemies{
     enemy(400, 200, inquisitor);
 }
 obstacles{
-    obstacle(660,800,25,10,12,200,44,null);
     obstacle(-45,650,1325,10,12,200,44,none);
     obstacle(-45,570,500,10,12,200,44,none);
     obstacle(520,570,100,10,12,200,44,none);
