@@ -21,11 +21,12 @@ import javax.swing.JPanel;
 import drawables.Drawable;
 import drawables.Enemy;
 import drawables.Hero;
+import drawables.Obstacle;
 
 public class Level extends JPanel{
 
 	private ArrayList<Enemy> enemies;
-	private ArrayList<Drawable> drawables;
+	private ArrayList<Obstacle> obstacles;
 	private Color backgroundColor;
 	private Image backgroundImage;
 	private Hero hero;
@@ -55,8 +56,28 @@ public class Level extends JPanel{
 				String setting = readAfter(line,'(');
 				this.hero = new Hero(Double.valueOf(readParameter(setting,0)),
 									 Double.valueOf(readParameter(setting,1)),
-									 Double.valueOf(readParameter(setting,2)));
+									 Double.valueOf(readParameter(setting,2)),
+									 Double.valueOf(readParameter(setting,3)));
 			}
+			else if(line.contains("obstacles")){
+				line = s.next();
+				obstacles = new ArrayList<Obstacle>();
+				while((!line.contains("}")) && (s.hasNext())){
+					String setting = readAfter(line,'(');
+					obstacles.add(new Obstacle(Double.valueOf(readParameter(setting,0)),
+											   Double.valueOf(readParameter(setting,1)),
+											   Integer.valueOf(readParameter(setting,2)),
+											   Integer.valueOf(readParameter(setting,3)),
+											   new Color(Integer.valueOf(readParameter(setting,4)),Integer.valueOf(readParameter(setting,5)),Integer.valueOf(readParameter(setting,6))),
+											   readParameter(setting,7)
+					));
+					line = s.next();
+				}
+			}
+			
+			
+			
+			
 			
 			
 			
@@ -98,8 +119,18 @@ public class Level extends JPanel{
 		Graphics2D g2 = (Graphics2D) g;
 		g.drawImage(this.backgroundImage, 0, 0,this);
 		this.hero.draw(g2);
+		for(Obstacle ob :this.obstacles){
+			ob.draw(g2);
+		}
 	}	
 	public Hero getHero() {
 		return this.hero;
+	}
+	public void update(){
+		this.hero.update();
+		
+		
+		
+		
 	}
 }

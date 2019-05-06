@@ -11,9 +11,11 @@ public class Hero extends Character{
 	private int height;
 	private int width;
 	private int keyPressed;
+	private int score;
+	private boolean isFalling;
 	
-	public Hero(double x, double y, double speed) {
-		super(x, y, speed);
+	public Hero(double x, double y, double speed, double fallSpeed) {
+		super(x, y, speed, fallSpeed);
 		height = 40;
 		width =25;
 	}
@@ -28,18 +30,27 @@ public class Hero extends Character{
 
 	@Override
 	public void checkCollision() {
-		if(this.x>=1280) {
-			this.x=0;
+		if(this.x>=1280){
+			x=-10;
 		}
-		else if(this.x<=0) {
-			this.x=1280;
+		else if(x<=-40){
+			x=1270;
+		}
+		if(y>=720){
+			y=0;
+		}
+		else if(y<=-10){
+			y=700;
 		}
 		
 	}
 
 	@Override
 	public void update() {
-		
+		checkCollision();
+		if(isFalling){
+			this.y-=fallSpeed;
+		}
 	}
 
 	public void setKeyPressed(int keyCode) {
@@ -57,7 +68,9 @@ public class Hero extends Character{
 	}
 
 	public void jump() {
-		
+		if(!isFalling){
+			
+		}
 	}
 
 	public void setX(int x) {

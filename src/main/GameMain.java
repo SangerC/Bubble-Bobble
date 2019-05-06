@@ -30,9 +30,6 @@ public class GameMain {
 		this.newGame(0);
 	}
 
-	
-	
-	
 	public void newGame(int levelNumber) {
 		this.gameFrame.getContentPane().removeAll();
 		this.level=new Level(levelDirectory+"level"+levelNumber+"/level"+levelNumber);
@@ -53,12 +50,11 @@ public class GameMain {
 	}
 	
 	public void update() {
-		if(this.level.getHero().getX()>=frameXSize){
-			this.level.getHero().setX(0);
-		}
-		else if(this.level.getHero().getX()<=-40){
-			this.level.getHero().setX(frameXSize-20);
-		}
+		this.level.update();
+
+		
+		
+		
 	}	
 	
 
@@ -87,16 +83,9 @@ public class GameMain {
 	}
 	
 	private int getNumberOfLevels(String dirPath){
-			int count = 0;
 		    File f = new File(dirPath);
 		    File[] files = f.listFiles();
-
-		    if (files != null)
-		    for (int i = 0; i < files.length; i++) {
-		        count++;
-		        File file = files[i];
-		    }
-		    return (count-2);
+		    return (files.length-2);
 	}
 	
 	public class GameListener implements ActionListener{

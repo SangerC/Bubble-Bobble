@@ -12,12 +12,10 @@ public class HeroListener implements KeyListener{
 	public HeroListener(Hero hero, GameMain gameMain){
 		this.hero=hero;
 		this.gameMain=gameMain;
-		System.out.println("I'm alive");
 	}
 	
 	@Override
 	public void keyPressed(KeyEvent e){
-		System.out.println(e.getKeyCode());
 		switch(e.getKeyCode()){
 		case(27)://esc
 			this.gameMain.pause();
