@@ -15,7 +15,7 @@ import screen.HomeScreen;
  * 
  * Also don't forget to write javadocs for your classes and methods.
  * 
- * @author <YOUR_NAMES_GO_HERE>
+ * @author Cullen LaKemper and Tim Wilson
  *
  */
 public class Main {

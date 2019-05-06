@@ -1,5 +1,16 @@
 package main;
 
+/**
+ * The class that listens for the users controls in the arcade game.
+ * 
+ *Handles keys pressed and the operations that go with each of them
+ * 
+ *
+ * 
+ * @author Cullen LaKemper and Tim Wilson
+ *
+ */
+
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import drawables.Hero;

@@ -1,5 +1,15 @@
 package screen;
 
+/**
+ * The frame class for the arcade game.
+ * 
+ * Handles the specifications of the frame that appears when the program runs
+ * 
+ * 
+ * @author Cullen LaKemper and Tim Wilson
+ *
+ */
+
 import java.awt.BorderLayout;
 
 import javax.swing.JFrame;

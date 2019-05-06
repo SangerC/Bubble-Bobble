@@ -1,5 +1,15 @@
 package main;
 
+/**
+ * The GameMain class for the arcade game.
+ * 
+ * Handles game functions and uses the main GameFrame for the game
+ * 
+ * 
+ * @author Cullen LaKemper and Tim Wilson
+ *
+ */
+
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
