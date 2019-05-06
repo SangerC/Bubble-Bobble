@@ -6,7 +6,7 @@ package drawables;
  * Abstract class that provides methods for the specifc type of Character, Enemy, which 
  * moves across the screen and uses computer generated movement
  * 
- * Also don't forget to write javadocs for your classes and methods.
+ * 
  * 
  * @author Cullen LaKemper and Tim Wilson
  *
