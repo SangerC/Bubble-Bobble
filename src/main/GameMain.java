@@ -51,13 +51,8 @@ public class GameMain {
 	
 	public void update() {
 		this.level.update();
-
-		
-		
-		
 	}	
 	
-
 	public void draw() {
 		this.level.repaint();
 	}
@@ -97,6 +92,7 @@ public class GameMain {
 		
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
+			this.gameMain.checkCollisons();
 			this.gameMain.update();
 			this.gameMain.draw();
 		}
@@ -108,5 +104,9 @@ public class GameMain {
 	public void pause() {
 		this.paused=true;
 		this.timer.stop();
+	}
+
+	public void checkCollisons() {
+		this.level.checkCollisons();
 	}
 }

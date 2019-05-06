@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.geom.Rectangle2D;
+import java.util.ArrayList;
 
 public class Hero extends Character{
 
@@ -16,8 +17,9 @@ public class Hero extends Character{
 	
 	public Hero(double x, double y, double speed, double fallSpeed) {
 		super(x, y, speed, fallSpeed);
-		height = 40;
-		width =25;
+		this.height = 40;
+		this.width =25;
+		this.isFalling=true;
 	}
 
 	@Override
@@ -30,27 +32,42 @@ public class Hero extends Character{
 
 	@Override
 	public void checkCollision() {
-		if(this.x>=1280){
-			x=-10;
-		}
-		else if(x<=-40){
-			x=1270;
-		}
-		if(y>=720){
-			y=0;
-		}
-		else if(y<=-10){
-			y=700;
-		}
 		
 	}
 
+	public void checkCollision(ArrayList<Obstacle> obstacles) {
+		this.isFalling=true;
+		for(Obstacle o: obstacles){
+			if((this.x+this.width>o.getX())&&
+			   (this.x<(o.getX()+o.getWidth()))&&
+			   ((this.y+this.height)>=o.getY())&&
+			   ((this.y+this.height)<=(o.getY()+20))){
+				this.isFalling=false;
+			}
+		}
+	}
+	
+	
 	@Override
 	public void update() {
-		checkCollision();
 		if(isFalling){
-			this.y-=fallSpeed;
+			this.y+=fallSpeed;
 		}
+		if(this.x>1290) {
+			this.x=-10;
+		}
+		else if(this.x<-40){
+			this.x=1280;
+		}
+		if(this.y>730) {
+			this.y=0;
+		}
+		else if(this.y<-10){
+			this.y=720;
+		}
+		
+		
+		
 	}
 
 	public void setKeyPressed(int keyCode) {

@@ -1,9 +1,11 @@
 backgroundColor=255,246,0;
 backgroundImage=levels/level0/TimWilson.jpg
-Hero(25,600,7,7);
+Hero(25,600,7,.3);
 enemies{
     enemy(400, 200, inquisitor);
 }
 obstacles{
     obstacle(660,800,25,10,12,200,44,none);
+    obstacle(-45,650,400,10,12,200,44,none);
+    obstacle(450,650,1280,10,12,200,44,none);
 }

@@ -128,9 +128,10 @@ public class Level extends JPanel{
 	}
 	public void update(){
 		this.hero.update();
-		
-		
-		
+	}
+
+	public void checkCollisons() {
+		this.hero.checkCollision(obstacles);
 		
 	}
 }

@@ -43,4 +43,8 @@ public class Obstacle extends Drawable{
 		
 	}
 
+	public double getWidth() {
+		return this.width;
+	}
+
 }
