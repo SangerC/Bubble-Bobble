@@ -14,7 +14,7 @@ package drawables;
 
 public abstract class Enemy extends Character{
 
-	public Enemy(double x, double y, double speed, double fallSpeed) {
-		super(x, y, speed, fallSpeed);
+	public Enemy(double x, double y, double speed, double fallSpeed, double jumpSpeed) {
+		super(x, y, speed, fallSpeed, jumpSpeed);
 	}
 }

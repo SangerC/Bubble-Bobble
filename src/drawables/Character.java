@@ -16,13 +16,15 @@ public abstract class Character extends Drawable{
 	
 	protected double speed;
 	protected double fallSpeed;
+	protected double jumpSpeed;
 	protected boolean isFalling;
 	protected boolean isJumping;
 	
-	public Character(double x, double y, double speed, double fallSpeed) {
+	public Character(double x, double y, double speed, double fallSpeed, double jumpSpeed) {
 		super(x, y);
 		this.speed=speed;
 		this.fallSpeed=fallSpeed;
+		this.jumpSpeed=jumpSpeed;
 	}
 
 	public double getSpeed() {

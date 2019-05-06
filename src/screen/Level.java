@@ -11,25 +11,16 @@ package screen;
  *
  */
 
-import java.awt.BorderLayout;
-import java.awt.Button;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.Scanner;
-
-import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JPanel;
-
-import drawables.Drawable;
 import drawables.Enemy;
 import drawables.Hero;
 import drawables.Obstacle;
@@ -68,7 +59,8 @@ public class Level extends JPanel{
 				this.hero = new Hero(Double.valueOf(readParameter(setting,0)),
 									 Double.valueOf(readParameter(setting,1)),
 									 Double.valueOf(readParameter(setting,2)),
-									 Double.valueOf(readParameter(setting,3)));
+									 Double.valueOf(readParameter(setting,3)),
+									 Double.valueOf(readParameter(setting,4)));
 			}
 			else if(line.contains("obstacles")){
 				line = s.next();

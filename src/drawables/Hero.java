@@ -1,12 +1,9 @@
 package drawables;
 
 import java.awt.Color;
-import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import javax.swing.Timer;
 
@@ -20,8 +17,8 @@ public class Hero extends Character{
 	private int score;
 	private Timer jumpTimer;
 	
-	public Hero(double x, double y, double speed, double fallSpeed) {
-		super(x, y, speed, fallSpeed);
+	public Hero(double x, double y, double speed, double fallSpeed, double jumpSpeed) {
+		super(x, y, speed, fallSpeed, jumpSpeed);
 		this.height = 40;
 		this.width =25;
 		this.isFalling=true;
@@ -48,7 +45,7 @@ public class Hero extends Character{
 			if((this.x+this.width>o.getX())&&
 			   (this.x<(o.getX()+o.getWidth()))&&
 			   ((this.y+this.height)>=o.getY())&&
-			   ((this.y+this.height)<=(o.getY()+20))){
+			   ((this.y+this.height)<=(o.getY()+3))){
 				this.isFalling=false;
 			}
 		}
@@ -58,10 +55,10 @@ public class Hero extends Character{
 	@Override
 	public void update() {
 		if(isFalling){
-			this.y+=fallSpeed;
+			this.y+=this.fallSpeed;
 		}
 		if(isJumping) {
-			this.y-=.6;
+			this.y-=this.jumpSpeed;
 		}
 		if(this.x>1290) {
 			this.x=-10;
