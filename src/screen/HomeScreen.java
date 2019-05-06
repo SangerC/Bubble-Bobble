@@ -1,5 +1,16 @@
 package screen;
 
+/**
+ * The home screen class for the arcade game.
+ * 
+ * 
+ * Creates the home screen which allows the user to begin playing the game
+ *
+ * 
+ * @author Cullen LaKemper and Tim Wilson
+ *
+ */
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.GridBagConstraints;

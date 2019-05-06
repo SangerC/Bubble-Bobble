@@ -1,5 +1,16 @@
 package screen;
 
+/**
+ * The level screen class for the arcade game.
+ * 
+ * 
+ * Creates the level layout and specifications
+ * 
+ * 
+ * @author Cullen LaKemper and Tim Wilson
+ *
+ */
+
 import java.awt.BorderLayout;
 import java.awt.Button;
 import java.awt.Color;

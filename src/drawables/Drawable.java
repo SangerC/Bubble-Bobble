@@ -1,5 +1,16 @@
 package drawables;
 
+/**
+ * The drawing class for the arcade game.
+ * 
+ * Abstract class that provides methods for anything produced on the level screen
+ * 
+ * Also don't forget to write javadocs for your classes and methods.
+ * 
+ * @author Cullen LaKemper and Tim Wilson
+ *
+ */
+
 import java.awt.Graphics2D;
 
 public abstract class Drawable {
