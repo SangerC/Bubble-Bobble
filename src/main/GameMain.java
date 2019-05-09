@@ -18,6 +18,7 @@ import java.io.File;
 import javax.swing.Timer;
 import screen.GameFrame;
 import screen.Level;
+import utility.Utilities;
 
 public class GameMain {
 	
@@ -29,7 +30,6 @@ public class GameMain {
 	private Level level;
 	private HeroListener heroListener;
 	private int currentLevel;
-	private boolean running=false;
 	private boolean paused=false;
 	private Timer timer;
 
@@ -66,29 +66,40 @@ public class GameMain {
 	}
 	
 	public void nextLevel() {
-		if(this.currentLevel==getNumberOfLevels(levelDirectory)){
-			
-		}
-		else{
+		if(this.currentLevel!=Utilities.getNumberOfLevels(levelDirectory)){
 			this.currentLevel++;
+			this.endGame();
 			newGame(this.currentLevel);
 		}
 	}
 	
 	public void previousLevel() {
-		if(this.currentLevel==0){
-			
-		}
-		else{
+		if(this.currentLevel!=0){
 			this.currentLevel--;
+			this.endGame();
 			newGame(this.currentLevel);
 		}
 	}
 	
-	private int getNumberOfLevels(String dirPath){
-		    File f = new File(dirPath);
-		    File[] files = f.listFiles();
-		    return (files.length-2);
+	public void endGame(){
+		this.gameFrame.removeKeyListener(this.heroListener);
+		this.timer.stop();
+	}
+	
+	
+	public void togglePause() {
+		if(this.paused){
+			this.paused=false;
+			this.timer.restart();
+		}
+		else {
+			this.paused=true;
+			this.timer.stop();
+		}
+	}
+
+	public void checkCollisons() {
+		this.level.checkCollisons();
 	}
 	
 	public class GameListener implements ActionListener{
@@ -103,18 +114,6 @@ public class GameMain {
 			this.gameMain.checkCollisons();
 			this.gameMain.update();
 			this.gameMain.draw();
-		}
-		
-		
-		
-	}
-
-	public void pause() {
-		this.paused=true;
-		this.timer.stop();
-	}
-
-	public void checkCollisons() {
-		this.level.checkCollisons();
+		}	
 	}
 }

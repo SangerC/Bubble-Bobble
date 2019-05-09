@@ -29,7 +29,7 @@ public class HeroListener implements KeyListener{
 	public void keyPressed(KeyEvent e){
 		switch(e.getKeyCode()){
 		case(27)://esc
-			this.gameMain.pause();
+			this.gameMain.togglePause();
 			break;
 		case(37)://left arrow
 			this.hero.moveLeft();
