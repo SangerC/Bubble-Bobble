@@ -26,6 +26,7 @@ public abstract class Character extends Drawable{
 	protected double jumpSpeed;
 	protected boolean isFalling;
 	protected boolean isJumping;
+	protected boolean facingRight;
 	protected int height;
 	protected int width;
 	protected Timer jumpTimer;
@@ -46,10 +47,20 @@ public abstract class Character extends Drawable{
 	
 	public void moveRight() {
 		this.x+=this.speed;
+		this.facingRight=true;
 	}
 	
 	public void moveLeft() {
 		this.x-=this.speed;
+		this.facingRight=false;
+	}
+	
+	public double getWidth() {
+		return this.width;
+	}
+	
+	public double getHeight() {
+		return this.width;
 	}
 	
 	public void checkCollision(ArrayList<Obstacle> obstacles) {
@@ -84,7 +95,9 @@ public abstract class Character extends Drawable{
 			this.y=720;
 		}
 	}
-	
+	public boolean getFacingRight() {
+		return this.facingRight;
+	}
 	public void setFallSpeed(double fallSpeed) {
 		this.fallSpeed=fallSpeed;	
 	}

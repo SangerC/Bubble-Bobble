@@ -17,6 +17,7 @@ public abstract class Drawable {
 
 	protected double x;
 	protected double y;
+	protected boolean die;
 	
 	
 	public Drawable(double x, double y) {
@@ -29,7 +30,6 @@ public abstract class Drawable {
 		this.x=x;
 		this.y=y;
 	}
-	public abstract void checkCollision();
 	public void remove() {
 		
 	}
@@ -39,5 +39,8 @@ public abstract class Drawable {
 	}
 	public double getY() {
 		return this.y;
+	}
+	public boolean getDie() {
+		return this.die;
 	}
 }

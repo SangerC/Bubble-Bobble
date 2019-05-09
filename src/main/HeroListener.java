@@ -49,7 +49,7 @@ public class HeroListener implements KeyListener{
 			this.gameMain.previousLevel();
 			break;
 		case(32)://spacebar
-			this.hero.blowBubble();
+			this.gameMain.getLevel().blowBubble();
 			break;
 		}
 	}

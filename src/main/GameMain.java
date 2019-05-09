@@ -18,7 +18,6 @@ import java.io.File;
 import javax.swing.Timer;
 import screen.GameFrame;
 import screen.Level;
-import utility.Utilities;
 
 public class GameMain {
 	
@@ -58,11 +57,17 @@ public class GameMain {
 	}
 	
 	public void nextLevel() {
-		if(this.currentLevel!=Utilities.getNumberOfLevels(levelDirectory)){
+		if(this.currentLevel!=getNumberOfLevels(levelDirectory)){
 			this.currentLevel++;
 			this.endGame();
 			newGame(this.currentLevel);
 		}
+	}
+	
+	public static int getNumberOfLevels(String dirPath){
+	    File f = new File(dirPath);
+	    File[] files = f.listFiles();
+	    return (files.length-2);
 	}
 	
 	public void previousLevel() {
@@ -114,5 +119,9 @@ public class GameMain {
 			this.gameMain.update();
 			this.gameMain.draw();
 		}	
+	}
+
+	public Level getLevel() {
+		return this.level;
 	}
 }

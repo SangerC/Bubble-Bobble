@@ -21,6 +21,8 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.JPanel;
+
+import drawables.Bubble;
 import drawables.Enemy;
 import drawables.Hero;
 import drawables.Obstacle;
@@ -29,6 +31,7 @@ public class Level extends JPanel{
 
 	private ArrayList<Enemy> enemies;
 	private ArrayList<Obstacle> obstacles;
+	private ArrayList<Bubble> bubbles;
 	private Color backgroundColor;
 	private Image backgroundImage;
 	private Hero hero;
@@ -92,7 +95,7 @@ public class Level extends JPanel{
 		
 		
 		
-		
+		this.bubbles=new ArrayList<Bubble>();
 		this.setBackground(backgroundColor);
 		this.repaint();
 	}
@@ -125,16 +128,39 @@ public class Level extends JPanel{
 		for(Obstacle ob :this.obstacles){
 			ob.draw(g2);
 		}
+		for(Bubble bub :this.bubbles){
+			bub.draw(g2);
+		}
 	}	
 	public Hero getHero() {
 		return this.hero;
 	}
 	public void update(){
+		ArrayList<Bubble> bubblesToRemove = new ArrayList<Bubble>();
 		this.hero.update();
+		for(Bubble bub :this.bubbles){
+			bub.update();
+			if(bub.getDie()) {
+				bubblesToRemove.add(bub);
+			}
+		}
+		for(Bubble bub : bubblesToRemove){
+			this.bubbles.remove(bub);
+		}
+		
 	}
 
 	public void checkCollisons() {
 		this.hero.checkCollision(obstacles);
 		
+	}
+
+	public void blowBubble() {
+		if(this.hero.getFacingRight()){
+			this.bubbles.add(new Bubble(this.hero.getX()+this.hero.getWidth(),this.hero.getY()-this.hero.getHeight()/2,this.hero.getBubbleColor(),true,this.hero.getBubbleSpeed()));
+		}
+		else{
+			this.bubbles.add(new Bubble(this.hero.getX()-this.hero.getWidth(),this.hero.getY()-this.hero.getHeight()/2,this.hero.getBubbleColor(),false,this.hero.getBubbleSpeed()));
+		}
 	}
 }

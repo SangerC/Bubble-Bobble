@@ -11,6 +11,8 @@ public class Hero extends Character{
 	
 	private int keyPressed;
 	private int score;
+	private Color bubbleColor = Color.blue;
+	private double bubbleSpeed=5;
 
 	public Hero(double x, double y, double speed, double fallSpeed, double jumpSpeed) {
 		super(x, y, speed, fallSpeed, jumpSpeed);
@@ -23,10 +25,6 @@ public class Hero extends Character{
 		g2.setColor(Color.black);
 		g2.fillRect(0,0,this.width,this.height);
 		g2.translate(-this.x, -this.y);
-	}
-	@Override
-	public void checkCollision() {
-		
 	}
 	@Override
 	public void update() {
@@ -45,5 +43,11 @@ public class Hero extends Character{
 	}
 	public int getKeyPressed() {
 		return this.keyPressed;
+	}
+	public Color getBubbleColor() {
+		return this.bubbleColor;
+	}
+	public double getBubbleSpeed() {
+		return this.bubbleSpeed;
 	}
 }
