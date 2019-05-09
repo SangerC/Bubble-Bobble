@@ -22,7 +22,7 @@ import utility.Utilities;
 
 public class GameMain {
 	
-	private static final int DELAY = 1;
+	private static final int DELAY = 16;
 	private static final String levelDirectory = "levels/";
 	private static final int frameXSize = 1280;
 	private static final int frameYSize = 720;
