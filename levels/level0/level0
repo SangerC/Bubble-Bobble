@@ -1,7 +1,10 @@
 backgroundColor=255,246,0;
 Hero(25,600,7,.3,.7);
 enemies{
-    enemy(400, 200, inquisitor);
+   inquisitor(400,200,6,.3,.7);
+   inquisitor(500,100,6,.3,.7);
+   enoth(600,100,6,.3,.7);
+   enoth(700,200,6,.3,.7);
 }
 obstacles{
     obstacle(-45,650,400,10,12,200,44,none);
