@@ -1,5 +1,5 @@
 backgroundColor=120,246,0;
-Hero(25,600,7,.3,.7);
+Hero(25,600,5,3,7);
 enemies{
    inquisitor(700,150,6,.3,.7);
    inquisitor(100,100,6,.3,.7);
