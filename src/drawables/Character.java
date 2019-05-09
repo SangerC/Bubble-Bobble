@@ -19,7 +19,7 @@ import javax.swing.Timer;
 
 public abstract class Character extends Drawable{
 	
-	protected static final int JUMPLENGTH = 350;
+	protected static final int JUMPLENGTH = 750;
 	
 	protected double speed;
 	protected double fallSpeed;
@@ -50,13 +50,6 @@ public abstract class Character extends Drawable{
 	
 	public void moveLeft() {
 		this.x-=this.speed;
-	}
-	
-	public void jump() {
-		if(!isFalling){
-			this.isJumping=true;
-			jumpTimer.start();
-		}
 	}
 	
 	public void checkCollision(ArrayList<Obstacle> obstacles) {
@@ -101,6 +94,13 @@ public abstract class Character extends Drawable{
 	}
 	public double getFallSpeed() {
 		return this.fallSpeed;
+	}
+	
+	public void jump() {
+		if(!isFalling){
+			this.isJumping=true;
+			jumpTimer.start();
+		}
 	}
 
 	public void setIsJumping(boolean isJumping) {

@@ -30,6 +30,14 @@ public class Hero extends Character{
 	}
 	@Override
 	public void update() {
+		switch(keyPressed){
+			case 37:
+				this.moveLeft();
+				break;
+			case 39:
+				this.moveRight();
+				break;
+		}
 		super.update();
 	}
 	public void setKeyPressed(int keyCode) {

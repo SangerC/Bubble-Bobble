@@ -32,10 +32,10 @@ public class HeroListener implements KeyListener{
 			this.gameMain.togglePause();
 			break;
 		case(37)://left arrow
-			this.hero.moveLeft();
+			this.hero.setKeyPressed(37);
 			break;
 		case(39)://right arrow
-			this.hero.moveRight();
+			this.hero.setKeyPressed(39);
 			break;
 		case(38)://up arrow
 			this.hero.jump();
@@ -52,8 +52,19 @@ public class HeroListener implements KeyListener{
 	}
 
 	@Override
-	public void keyReleased(KeyEvent arg0){
-		hero.setKeyPressed(0);
+	public void keyReleased(KeyEvent e){
+		switch(e.getKeyCode()){
+			case(37)://left arrow
+				if(this.hero.getKeyPressed()==37){
+					this.hero.setKeyPressed(0);
+				}
+				break;
+		case(39)://right arrow
+			if(this.hero.getKeyPressed()==39){
+				this.hero.setKeyPressed(0);
+			}
+			break;
+		}
 	}
 
 	@Override

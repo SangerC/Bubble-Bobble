@@ -57,14 +57,6 @@ public class GameMain {
 		this.timer.start();
 	}
 	
-	public void update() {
-		this.level.update();
-	}	
-	
-	public void draw() {
-		this.level.repaint();
-	}
-	
 	public void nextLevel() {
 		if(this.currentLevel!=Utilities.getNumberOfLevels(levelDirectory)){
 			this.currentLevel++;
@@ -86,7 +78,6 @@ public class GameMain {
 		this.timer.stop();
 	}
 	
-	
 	public void togglePause() {
 		if(this.paused){
 			this.paused=false;
@@ -100,6 +91,14 @@ public class GameMain {
 
 	public void checkCollisons() {
 		this.level.checkCollisons();
+	}
+	
+	public void update() {
+		this.level.update();
+	}	
+	
+	public void draw() {
+		this.level.repaint();
 	}
 	
 	public class GameListener implements ActionListener{
