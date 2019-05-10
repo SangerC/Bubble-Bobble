@@ -1,12 +1,10 @@
 package drawables;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Random;
-
 import javax.swing.Timer;
+import screen.Level;
 
 /**
  * The Enemy class for the arcade game.
@@ -26,24 +24,26 @@ public abstract class Enemy extends Character{
 	
 	private Timer moveTimer;
 	private boolean moveChange;
+	protected Level level;
 
-	public Enemy(double x, double y, double speed, double fallSpeed, double jumpSpeed) {
+	public Enemy(double x, double y, double speed, double fallSpeed, double jumpSpeed, Level level) {
 		super(x, y, speed, fallSpeed, jumpSpeed);
 		this.height=40;
 		this.width=20;
 		this.moveChange=true;
 		this.moveTimer=new Timer(MOVEDELAY,new MoveListener(this));
+		this.level=level;
 	}
-		
-	public void update(Hero hero) {
-		this.update();
-		System.out.println(this.isJumping);
+	
+	@Override
+	public void update() {
+		super.update();
 		Random rand = new Random(); 
-		if(this.y>hero.getY()+3&&rand.nextInt(500)==1) {
+		if(this.y>this.level.getHero().getY()+3&&rand.nextInt(500)==1) {
 			this.jump();
 		}
-		else if(this.y>hero.getY()-3&&this.moveChange){
-			if(hero.getX()>this.x&&rand.nextInt(100)>25){
+		else if(this.y>this.level.getHero().getY()-3&&this.moveChange){
+			if(this.level.getHero().getX()>this.x&&rand.nextInt(100)>25){
 				this.moveChange=false;
 				this.moveTimer.restart();
 				this.facingRight=true;

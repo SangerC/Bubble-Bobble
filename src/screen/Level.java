@@ -22,6 +22,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.JPanel;
 import drawables.Bubble;
+import drawables.Bullet;
 import drawables.Enemy;
 import drawables.Enoth;
 import drawables.Hero;
@@ -33,6 +34,7 @@ public class Level extends JPanel{
 	private ArrayList<Enemy> enemies;
 	private ArrayList<Obstacle> obstacles;
 	private ArrayList<Bubble> bubbles;
+	private ArrayList<Bullet> bullets;
 	private Color backgroundColor;
 	private Image backgroundImage;
 	private Hero hero;
@@ -91,20 +93,23 @@ public class Level extends JPanel{
 														Double.valueOf(readParameter(setting,1)),
 														Double.valueOf(readParameter(setting,2)),
 														Double.valueOf(readParameter(setting,3)),
-														Double.valueOf(readParameter(setting,4))));
+														Double.valueOf(readParameter(setting,4)),
+														this));
 					}
 					else if(line.contains("enoth")){
 						this.enemies.add(new Enoth(Double.valueOf(readParameter(setting,0)),
 												   Double.valueOf(readParameter(setting,1)),
 												   Double.valueOf(readParameter(setting,2)),
 												   Double.valueOf(readParameter(setting,3)),
-												   Double.valueOf(readParameter(setting,4))));
+												   Double.valueOf(readParameter(setting,4)),
+												   this));
 					}
 					line = s.next();
 				}
 			}
 		}		
 		this.bubbles=new ArrayList<Bubble>();
+		this.bullets=new ArrayList<Bullet>();
 		this.setBackground(backgroundColor);
 		this.repaint();
 	}
@@ -143,12 +148,16 @@ public class Level extends JPanel{
 		for(Enemy en :this.enemies){
 			en.draw(g2);
 		}
+		for(Bullet bill :this.bullets){
+			bill.draw(g2);
+		}
 	}	
 	public Hero getHero() {
 		return this.hero;
 	}
 	public void update(){
 		ArrayList<Bubble> bubblesToRemove = new ArrayList<Bubble>();
+		ArrayList<Bullet> bulletsToRemove = new ArrayList<Bullet>();
 		this.hero.update();
 		for(Bubble bub :this.bubbles){
 			bub.update();
@@ -156,11 +165,20 @@ public class Level extends JPanel{
 				bubblesToRemove.add(bub);
 			}
 		}
+		for(Bullet bill :this.bullets){
+			bill.update();
+			if(bill.getDie()) {
+				bulletsToRemove.add(bill);
+			}
+		}
 		for(Enemy en :this.enemies){
-			en.update(this.hero);
+			en.update();
 		}
 		for(Bubble bub : bubblesToRemove){
 			this.bubbles.remove(bub);
+		}
+		for(Bullet bill : bulletsToRemove){
+			this.bullets.remove(bill);
 		}
 		
 	}
@@ -179,5 +197,9 @@ public class Level extends JPanel{
 		else{
 			this.bubbles.add(new Bubble(this.hero.getX()-this.hero.getWidth(),this.hero.getY()-this.hero.getHeight()/2,this.hero.getBubbleColor(),false,this.hero.getBubbleSpeed()));
 		}
+	}
+	
+	public void addBullet(Bullet bill) {
+		this.bullets.add(bill);
 	}
 }

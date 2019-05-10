@@ -2,11 +2,12 @@ package drawables;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import screen.Level;
 
 public class Enoth extends Enemy{
 
-	public Enoth(double x, double y, double speed, double fallSpeed, double jumpSpeed) {
-		super(x, y, speed, fallSpeed, jumpSpeed);
+	public Enoth(double x, double y, double speed, double fallSpeed, double jumpSpeed, Level level) {
+		super(x, y, speed, fallSpeed, jumpSpeed, level);
 	}
 
 	@Override
