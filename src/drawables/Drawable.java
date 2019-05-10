@@ -43,4 +43,7 @@ public abstract class Drawable {
 	public boolean getDie() {
 		return this.die;
 	}
+	public void setDie(boolean die) {
+		this.die=die;
+	}
 }

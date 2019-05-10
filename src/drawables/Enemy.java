@@ -2,6 +2,7 @@ package drawables;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.Timer;
 import screen.Level;
@@ -25,6 +26,7 @@ public abstract class Enemy extends Character{
 	private Timer moveTimer;
 	private boolean moveChange;
 	protected Level level;
+	private Bubble bubble;
 
 	public Enemy(double x, double y, double speed, double fallSpeed, double jumpSpeed, Level level) {
 		super(x, y, speed, fallSpeed, jumpSpeed);
@@ -37,31 +39,42 @@ public abstract class Enemy extends Character{
 	
 	@Override
 	public void update() {
-		super.update();
-		Random rand = new Random(); 
-		if(this.y>this.level.getHero().getY()+3&&rand.nextInt(500)==1) {
-			this.jump();
-		}
-		else if(this.y>this.level.getHero().getY()-3&&this.moveChange){
-			if(this.level.getHero().getX()>this.x&&rand.nextInt(100)>25){
-				this.moveChange=false;
-				this.moveTimer.restart();
-				this.facingRight=true;
+		if(this.bubble==null){
+			super.update();
+			Random rand = new Random(); 
+			if(this.y>this.level.getHero().getY()+3&&rand.nextInt(500)==1) {
+				this.jump();
 			}
-			else{
-				this.moveChange=false;
-				this.moveTimer.restart();
-				this.facingRight=false;
+			else if(this.y>this.level.getHero().getY()-3&&this.moveChange){
+				if(this.level.getHero().getX()>this.x&&rand.nextInt(100)>25){
+					this.moveChange=false;
+					this.moveTimer.restart();
+					this.facingRight=true;
+				}
+				else{
+					this.moveChange=false;
+					this.moveTimer.restart();
+					this.facingRight=false;
+				}
+			}
+			if(this.facingRight) {
+				this.moveRight();
+			}
+			else {
+				this.moveLeft();
 			}
 		}
-		if(this.facingRight) {
-			this.moveRight();
-		}
-		else {
-			this.moveLeft();
+		else{
+			this.x=bubble.getX();
+			this.y=bubble.getY();
 		}
 		
 	}
+	
+	public void checkCollision(Bubble bubbles){
+		if(this.bubble==null) {}
+	}
+	
 	
 	private class MoveListener implements ActionListener{
 

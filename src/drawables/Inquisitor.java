@@ -25,11 +25,11 @@ public class Inquisitor extends Enemy{
 		super.update();
 		Random rand = new Random(); 
 		if(this.y>=this.level.getHero().getY()-5&&this.y<=this.level.getHero().getY()+5&&rand.nextInt(100)==4){
-			if(this.facingRight) {
-				this.level.addBullet(new Bullet(this.x,this.y,Color.gray,10,7));
+			if(this.x<this.level.getHero().getX()) {
+				this.level.addBullet(new Bullet(this.x,this.y+this.height/2,Color.gray,10,7));
 			}
 			else {
-				this.level.addBullet(new Bullet(this.x,this.y,Color.gray,10,-7));
+				this.level.addBullet(new Bullet(this.x,this.y+this.height/2,Color.gray,10,-7));
 			}
 			
 		}
