@@ -38,6 +38,8 @@ public class Level extends JPanel{
 	private Color backgroundColor;
 	private Image backgroundImage;
 	private Hero hero;
+	private double heroStartX;
+	private double heroStartY;
 	
 	public Level(String fileName){
 		FileReader file=null;
@@ -67,6 +69,8 @@ public class Level extends JPanel{
 									 Double.valueOf(readParameter(setting,2)),
 									 Double.valueOf(readParameter(setting,3)),
 									 Double.valueOf(readParameter(setting,4)));
+				this.heroStartX= Double.valueOf(readParameter(setting,0);
+				this.heroStartY=Double.valueOf(readParameter(setting,1);
 			}
 			else if(line.contains("obstacles")){
 				line = s.next();
@@ -159,6 +163,13 @@ public class Level extends JPanel{
 		ArrayList<Bubble> bubblesToRemove = new ArrayList<Bubble>();
 		ArrayList<Bullet> bulletsToRemove = new ArrayList<Bullet>();
 		this.hero.update();
+		if(this.hero.getDie()) {
+			this.hero.move(this.heroStartX, this.heroStartY);
+			this.hero.setLife(this.hero.getLife()-1);
+			if(this.hero.getLife()==0) {
+				System.out.println("Game Over");
+			}
+		}
 		for(Bubble bub :this.bubbles){
 			bub.update();
 			if(bub.getDie()) {

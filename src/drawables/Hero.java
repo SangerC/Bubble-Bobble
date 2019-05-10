@@ -13,11 +13,13 @@ public class Hero extends Character{
 	private int score;
 	private Color bubbleColor = Color.blue;
 	private double bubbleSpeed=5;
+	private int life;
 
 	public Hero(double x, double y, double speed, double fallSpeed, double jumpSpeed) {
 		super(x, y, speed, fallSpeed, jumpSpeed);
 		this.height = 40;
-		this.width =25;	
+		this.width =25;
+		this.life=5;
 	}
 	@Override
 	public void draw(Graphics2D g2) {
@@ -49,5 +51,11 @@ public class Hero extends Character{
 	}
 	public double getBubbleSpeed() {
 		return this.bubbleSpeed;
+	}
+	public void setLife(int life) {
+		this.life=life;
+	}
+	public int getLife() {
+		return this.life;
 	}
 }
