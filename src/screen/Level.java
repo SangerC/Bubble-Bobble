@@ -159,9 +159,6 @@ public class Level extends JPanel{
 		for(Enemy en :this.enemies){
 			en.update(this.hero);
 		}
-		
-		
-		
 		for(Bubble bub : bubblesToRemove){
 			this.bubbles.remove(bub);
 		}
@@ -170,7 +167,9 @@ public class Level extends JPanel{
 
 	public void checkCollisons() {
 		this.hero.checkCollision(obstacles);
-		
+		for(Enemy en :this.enemies){
+			en.checkCollision(obstacles);
+		}
 	}
 
 	public void blowBubble() {
