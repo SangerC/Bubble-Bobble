@@ -21,10 +21,11 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.JPanel;
-
 import drawables.Bubble;
 import drawables.Enemy;
+import drawables.Enoth;
 import drawables.Hero;
+import drawables.Inquisitor;
 import drawables.Obstacle;
 
 public class Level extends JPanel{
@@ -80,21 +81,29 @@ public class Level extends JPanel{
 					line = s.next();
 				}
 			}
-			
-			
-			
-			
-			
-			
-			
+			else if(line.contains("enemies")){
+				line = s.next();
+				this.enemies = new ArrayList<Enemy>();
+				while((!line.contains("}")) && (s.hasNext())){
+					String setting = readAfter(line,'(');
+					if(line.contains("inquisitor")){
+						this.enemies.add(new Inquisitor(Double.valueOf(readParameter(setting,0)),
+														Double.valueOf(readParameter(setting,1)),
+														Double.valueOf(readParameter(setting,2)),
+														Double.valueOf(readParameter(setting,3)),
+														Double.valueOf(readParameter(setting,4))));
+					}
+					else if(line.contains("enoth")){
+						this.enemies.add(new Enoth(Double.valueOf(readParameter(setting,0)),
+												   Double.valueOf(readParameter(setting,1)),
+												   Double.valueOf(readParameter(setting,2)),
+												   Double.valueOf(readParameter(setting,3)),
+												   Double.valueOf(readParameter(setting,4))));
+					}
+					line = s.next();
+				}
+			}
 		}		
-		
-		
-		
-		
-		
-		
-		
 		this.bubbles=new ArrayList<Bubble>();
 		this.setBackground(backgroundColor);
 		this.repaint();
@@ -131,6 +140,9 @@ public class Level extends JPanel{
 		for(Bubble bub :this.bubbles){
 			bub.draw(g2);
 		}
+		for(Enemy en :this.enemies){
+			en.draw(g2);
+		}
 	}	
 	public Hero getHero() {
 		return this.hero;
@@ -144,6 +156,12 @@ public class Level extends JPanel{
 				bubblesToRemove.add(bub);
 			}
 		}
+		for(Enemy en :this.enemies){
+			en.update(this.hero);
+		}
+		
+		
+		
 		for(Bubble bub : bubblesToRemove){
 			this.bubbles.remove(bub);
 		}
