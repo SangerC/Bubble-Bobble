@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.Timer;
 
-public class Hero extends Character{
+public class Hero extends Entity{
 	
 	private int keyPressed;
 	private int score;

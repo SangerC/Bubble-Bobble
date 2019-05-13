@@ -19,7 +19,7 @@ import screen.Level;
  *
  */
 
-public abstract class Enemy extends Character{
+public abstract class Enemy extends Entity{
 	
 	private static final int MOVEDELAY =2000;
 	
@@ -72,7 +72,15 @@ public abstract class Enemy extends Character{
 	}
 	
 	public void checkCollision(Bubble bubbles){
-		if(this.bubble==null) {}
+		
+		
+		
+		
+		
+		
+		
+		
+		
 	}
 	
 	
@@ -94,6 +102,10 @@ public abstract class Enemy extends Character{
 	public void allowMoveChange() {
 		this.moveTimer.stop();
 		this.moveChange=true;
+	}
+	
+	public Bubble getBubble() {
+		return this.bubble;
 	}
 	
 	

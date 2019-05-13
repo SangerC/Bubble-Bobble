@@ -94,4 +94,8 @@ public class Bubble extends Drawable{
 	public double getWidth() {
 		return this.width;
 	}
+	
+	public boolean getFilled() {
+		return this.filled;
+	}
 }

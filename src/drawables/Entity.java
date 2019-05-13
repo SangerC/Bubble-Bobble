@@ -17,7 +17,7 @@ import javax.swing.Timer;
  *
  */
 
-public abstract class Character extends Drawable{
+public abstract class Entity extends Drawable{
 	
 	protected static final int JUMPLENGTH = 750;
 	
@@ -31,7 +31,7 @@ public abstract class Character extends Drawable{
 	protected int width;
 	protected Timer jumpTimer;
 	
-	public Character(double x, double y, double speed, double fallSpeed, double jumpSpeed) {
+	public Entity(double x, double y, double speed, double fallSpeed, double jumpSpeed) {
 		super(x, y);
 		this.speed=speed;
 		this.fallSpeed=fallSpeed;
@@ -122,9 +122,9 @@ public abstract class Character extends Drawable{
 	
 	protected class JumpListener implements ActionListener{
 		
-		private Character character;
+		private Entity character;
 		
-		public JumpListener(Character character){
+		public JumpListener(Entity character){
 			this.character=character;
 		}
 		

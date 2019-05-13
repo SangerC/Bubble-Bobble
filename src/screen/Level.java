@@ -188,7 +188,9 @@ public class Level extends JPanel{
 		for(Enemy en :this.enemies){
 			en.checkCollision(obstacles);
 			for(Bubble bub:this.bubbles){
-				en.checkCollision(bub);
+				if(!bub.getFilled()&&en.getBubble()==null) {
+					en.checkCollision(bub);
+				}
 			}
 		}
 	}
