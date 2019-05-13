@@ -2,6 +2,7 @@ package drawables;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -57,5 +58,13 @@ public class Hero extends Entity{
 	}
 	public int getLife() {
 		return this.life;
+	}
+	public void checkFruitCollision(Fruit fruit) {
+		Rectangle h= new Rectangle((int)this.getX(), (int)this.getY(), this.width, this.height);
+		Rectangle f = new Rectangle((int)fruit.getX(), (int) fruit.getY(), (int)fruit.getWidth(), (int)fruit.getHeight());
+		if(h.getBounds().intersects(f)) {
+			fruit.setDie(true);
+			this.score+=fruit.getScore();
+		}
 	}
 }

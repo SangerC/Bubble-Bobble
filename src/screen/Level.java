@@ -25,6 +25,7 @@ import drawables.Bubble;
 import drawables.Bullet;
 import drawables.Enemy;
 import drawables.Enoth;
+import drawables.Fruit;
 import drawables.Hero;
 import drawables.Inquisitor;
 import drawables.Obstacle;
@@ -35,6 +36,7 @@ public class Level extends JPanel{
 	private ArrayList<Obstacle> obstacles;
 	private ArrayList<Bubble> bubbles;
 	private ArrayList<Bullet> bullets;
+	private ArrayList<Fruit> fruits;
 	private Color backgroundColor;
 	private Image backgroundImage;
 	private Hero hero;
@@ -162,6 +164,7 @@ public class Level extends JPanel{
 	public void update(){
 		ArrayList<Bubble> bubblesToRemove = new ArrayList<Bubble>();
 		ArrayList<Bullet> bulletsToRemove = new ArrayList<Bullet>();
+		ArrayList<Fruit> fruitToRemove = new ArrayList<Fruit>();
 		this.hero.update();
 		if(this.hero.getDie()) {
 			this.hero.move(this.heroStartX, this.heroStartY);
@@ -169,6 +172,13 @@ public class Level extends JPanel{
 			if(this.hero.getLife()==0) {
 				System.out.println("Game Over");
 			}
+			for(Fruit fruit: this.fruits) {
+				fruit.update();
+				if(fruit.getDie()) {
+					fruitToRemove.add(fruit);
+				}
+			}
+			
 		}
 		for(Bubble bub :this.bubbles){
 			bub.update();
