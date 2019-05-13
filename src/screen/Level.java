@@ -202,6 +202,7 @@ public class Level extends JPanel{
 			if(en.getDie()) {
 				enemiesToRemove.add(en);
 			}
+		
 		}
 		for(Bubble bub : bubblesToRemove){
 			this.bubbles.remove(bub);
@@ -232,6 +233,9 @@ public class Level extends JPanel{
 		for(Fruit fill: this.fruits){
 			hero.checkCollision(fill);
 			fill.checkCollision(obstacles);
+		}
+		for(Bullet bill: bullets) {
+			hero.checkCollision(bill);
 		}
 	}
 
