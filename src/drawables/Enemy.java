@@ -131,6 +131,7 @@ public abstract class Enemy extends Entity{
 		this.bubble.setDie(true);
 		this.bubble=null;
 		this.bubbleTimer.stop();
+		this.isFalling=true;
 	}
 	public void die() {
 		Random rand = new Random(); 

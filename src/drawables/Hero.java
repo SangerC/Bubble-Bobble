@@ -56,16 +56,17 @@ public class Hero extends Entity{
 		return this.life;
 	}
 	public void checkCollision(Fruit fruit) {
-		Rectangle h= new Rectangle((int)this.getX(), (int)this.getY(), this.width, this.height);
+		Rectangle h= new Rectangle((int)this.x, (int)this.y, this.width, this.height);
 		Rectangle f = new Rectangle((int)fruit.getX(), (int) fruit.getY(), (int)fruit.getWidth(), (int)fruit.getHeight());
-		if(h.getBounds().intersects(f)) {
+		if(h.getBounds2D().intersects(f)&&!fruit.isFalling) {
 			fruit.setDie(true);
 			this.score+=fruit.getScore();
+			System.out.println("Score = "+this.score);
 		}
 	}
 	public void checkCollision(Enemy enemy){
 		Rectangle a= new Rectangle((int)this.x,(int)this.y,this.width,this.height);
-		Rectangle b= new Rectangle((int)enemy.getX(),(int)enemy.getY(),(int)enemy.getWidth(),(int)enemy.getWidth());
+		Rectangle b= new Rectangle((int)enemy.getX(),(int)enemy.getY(),(int)enemy.getWidth(),(int)enemy.getHeight());
 		if(a.getBounds2D().intersects(b)){
 			if(enemy.getBubble()==null&&!this.die) {
 				this.die=true;

@@ -27,9 +27,11 @@ public abstract class Entity extends Drawable{
 	protected boolean isFalling;
 	protected boolean isJumping;
 	protected boolean facingRight;
+	protected boolean vulnerable;
 	protected int height;
 	protected int width;
 	protected Timer jumpTimer;
+	protected Timer invulnerableTimer;
 	
 	public Entity(double x, double y, double speed, double fallSpeed, double jumpSpeed) {
 		super(x, y);
@@ -38,7 +40,8 @@ public abstract class Entity extends Drawable{
 		this.jumpSpeed=jumpSpeed;
 		this.isFalling=true;
 		this.isJumping=false;
-		this.jumpTimer=new Timer(JUMPLENGTH,new JumpListener(this));	
+		this.vulnerable=true;
+		this.jumpTimer=new Timer(JUMPLENGTH,new JumpListener(this));
 	}
 
 	public double getSpeed() {
@@ -133,5 +136,9 @@ public abstract class Entity extends Drawable{
 			this.character.setIsJumping(false);
 			this.character.stopJumpTimer();
 		}
+	}
+	
+	public boolean getIsFalling() {
+		return this.isFalling;
 	}
 }

@@ -174,7 +174,6 @@ public class Level extends JPanel{
 		if(this.hero.getDie()) {
 			this.hero.move(this.heroStartX, this.heroStartY);
 			this.hero.setLife(this.hero.getLife()-1);
-			System.out.println(this.hero.getLife());
 			this.hero.setDie(false);
 			if(this.hero.getLife()==0) {
 				System.out.println("Game Over");
@@ -231,6 +230,7 @@ public class Level extends JPanel{
 			}
 		}
 		for(Fruit fill: this.fruits){
+			hero.checkCollision(fill);
 			fill.checkCollision(obstacles);
 		}
 	}
