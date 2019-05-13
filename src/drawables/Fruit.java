@@ -24,8 +24,8 @@ public class Fruit extends Entity{
 
 	}
 
-	public int Score() {
+	public int getScore() {
 		return this.score;
 	}
-
+	
 }
