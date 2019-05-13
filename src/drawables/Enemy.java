@@ -132,4 +132,9 @@ public abstract class Enemy extends Entity{
 		this.bubble=null;
 		this.bubbleTimer.stop();
 	}
+	public void die() {
+		Random rand = new Random(); 
+		this.level.addFruit(new Fruit(this.x,this.y,0,3,0,rand.nextInt(900)+100));
+		this.die=true;
+	}
 }

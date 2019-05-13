@@ -3,10 +3,6 @@ package drawables;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import javax.swing.Timer;
 
 public class Hero extends Entity{
 	
@@ -59,12 +55,24 @@ public class Hero extends Entity{
 	public int getLife() {
 		return this.life;
 	}
-	public void checkFruitCollision(Fruit fruit) {
+	public void checkCollision(Fruit fruit) {
 		Rectangle h= new Rectangle((int)this.getX(), (int)this.getY(), this.width, this.height);
 		Rectangle f = new Rectangle((int)fruit.getX(), (int) fruit.getY(), (int)fruit.getWidth(), (int)fruit.getHeight());
 		if(h.getBounds().intersects(f)) {
 			fruit.setDie(true);
 			this.score+=fruit.getScore();
+		}
+	}
+	public void checkCollision(Enemy enemy){
+		Rectangle a= new Rectangle((int)this.x,(int)this.y,this.width,this.height);
+		Rectangle b= new Rectangle((int)enemy.getX(),(int)enemy.getY(),(int)enemy.getWidth(),(int)enemy.getWidth());
+		if(a.getBounds2D().intersects(b)){
+			if(enemy.getBubble()==null&&!this.die) {
+				this.die=true;
+			}
+			else {
+				enemy.die();
+			}
 		}
 	}
 }

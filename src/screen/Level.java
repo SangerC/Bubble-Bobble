@@ -116,6 +116,7 @@ public class Level extends JPanel{
 		}		
 		this.bubbles=new ArrayList<Bubble>();
 		this.bullets=new ArrayList<Bullet>();
+		this.fruits=new ArrayList<Fruit>();
 		this.setBackground(backgroundColor);
 		this.repaint();
 	}
@@ -157,28 +158,33 @@ public class Level extends JPanel{
 		for(Bullet bill :this.bullets){
 			bill.draw(g2);
 		}
+		for(Fruit fill :this.fruits){
+			fill.draw(g2);
+		}
 	}	
 	public Hero getHero() {
 		return this.hero;
 	}
 	public void update(){
 		ArrayList<Bubble> bubblesToRemove = new ArrayList<Bubble>();
+		ArrayList<Enemy> enemiesToRemove = new ArrayList<Enemy>();
 		ArrayList<Bullet> bulletsToRemove = new ArrayList<Bullet>();
 		ArrayList<Fruit> fruitToRemove = new ArrayList<Fruit>();
 		this.hero.update();
 		if(this.hero.getDie()) {
 			this.hero.move(this.heroStartX, this.heroStartY);
 			this.hero.setLife(this.hero.getLife()-1);
+			System.out.println(this.hero.getLife());
+			this.hero.setDie(false);
 			if(this.hero.getLife()==0) {
 				System.out.println("Game Over");
 			}
-			for(Fruit fruit: this.fruits) {
-				fruit.update();
-				if(fruit.getDie()) {
-					fruitToRemove.add(fruit);
-				}
+		}
+		for(Fruit fruit: this.fruits) {
+			fruit.update();
+			if(fruit.getDie()) {
+				fruitToRemove.add(fruit);
 			}
-			
 		}
 		for(Bubble bub :this.bubbles){
 			bub.update();
@@ -194,12 +200,21 @@ public class Level extends JPanel{
 		}
 		for(Enemy en :this.enemies){
 			en.update();
+			if(en.getDie()) {
+				enemiesToRemove.add(en);
+			}
 		}
 		for(Bubble bub : bubblesToRemove){
 			this.bubbles.remove(bub);
 		}
 		for(Bullet bill : bulletsToRemove){
 			this.bullets.remove(bill);
+		}
+		for(Fruit fill : fruitToRemove){
+			this.fruits.remove(fill);
+		}
+		for(Enemy en : enemiesToRemove){
+			this.enemies.remove(en);
 		}
 		
 	}
@@ -208,11 +223,15 @@ public class Level extends JPanel{
 		this.hero.checkCollision(obstacles);
 		for(Enemy en :this.enemies){
 			en.checkCollision(obstacles);
+			this.hero.checkCollision(en);
 			for(Bubble bub:this.bubbles){
 				if(!bub.getFilled()&&en.getBubble()==null) {
 					en.checkCollision(bub);
 				}
 			}
+		}
+		for(Fruit fill: this.fruits){
+			fill.checkCollision(obstacles);
 		}
 	}
 
@@ -227,5 +246,9 @@ public class Level extends JPanel{
 	
 	public void addBullet(Bullet bill) {
 		this.bullets.add(bill);
+	}
+
+	public void addFruit(Fruit fruit) {
+		this.fruits.add(fruit);
 	}
 }

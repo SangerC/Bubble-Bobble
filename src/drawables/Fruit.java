@@ -18,10 +18,9 @@ public class Fruit extends Entity{
 	@Override
 	public void draw(Graphics2D g2) {
 		g2.translate(this.x, this.y);
-		g2.setColor(Color.ORANGE);
-		g2.drawRoundRect(0, 0, this.width, this.height, 20, 30);
-		g2.translate(this.x, this.y);
-
+		g2.setColor(Color.magenta);
+		g2.fillRoundRect(0, 0, this.width, this.height, 2, 3);
+		g2.translate(-this.x, -this.y);
 	}
 
 	public int getScore() {
