@@ -75,4 +75,12 @@ public class Hero extends Entity{
 			}
 		}
 	}
+	public void checkCollision(Bullet bill) {
+		Rectangle h = new Rectangle((int)this.getX(), (int)this.getY(), this.width, this.height);
+		Rectangle b = new Rectangle((int)bill.getX(), (int)bill.getY(), bill.getWidth(), bill.getWidth());
+		if(h.getBounds().intersects(b)&& this.die==false) {
+			this.die=true;
+			bill.setDie(true);
+		}
+	}
 }

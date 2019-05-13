@@ -37,4 +37,7 @@ public class Bullet extends Drawable{
 		
 	}
 
+	public int getWidth() {
+		return this.width;
+	}
 }
