@@ -3,7 +3,7 @@ package drawables;
 import java.awt.Color;
 import java.awt.Graphics2D;
 
-public class Fruit extends Character {
+public class Fruit extends Entity{
 	private int width=20;
 	private int height=20;
 	private int score;

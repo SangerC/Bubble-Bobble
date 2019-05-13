@@ -69,8 +69,8 @@ public class Level extends JPanel{
 									 Double.valueOf(readParameter(setting,2)),
 									 Double.valueOf(readParameter(setting,3)),
 									 Double.valueOf(readParameter(setting,4)));
-				this.heroStartX= Double.valueOf(readParameter(setting,0);
-				this.heroStartY=Double.valueOf(readParameter(setting,1);
+				this.heroStartX= Double.valueOf(readParameter(setting,0));
+				this.heroStartY=Double.valueOf(readParameter(setting,1));
 			}
 			else if(line.contains("obstacles")){
 				line = s.next();
