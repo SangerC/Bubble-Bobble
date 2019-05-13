@@ -98,4 +98,8 @@ public class Bubble extends Drawable{
 	public boolean getFilled() {
 		return this.filled;
 	}
+	
+	public void setFilled(boolean filled) {
+		this.filled=filled;
+	}
 }

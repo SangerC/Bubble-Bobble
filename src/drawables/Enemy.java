@@ -1,7 +1,9 @@
 package drawables;
 
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.Area;
 import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.Timer;
@@ -22,8 +24,10 @@ import screen.Level;
 public abstract class Enemy extends Entity{
 	
 	private static final int MOVEDELAY =2000;
+	private static final int BUBBLEDELAY =6000;
 	
 	private Timer moveTimer;
+	private Timer bubbleTimer;
 	private boolean moveChange;
 	protected Level level;
 	private Bubble bubble;
@@ -34,6 +38,7 @@ public abstract class Enemy extends Entity{
 		this.width=20;
 		this.moveChange=true;
 		this.moveTimer=new Timer(MOVEDELAY,new MoveListener(this));
+		this.bubbleTimer=new Timer(BUBBLEDELAY,new BubbleListener(this));
 		this.level=level;
 	}
 	
@@ -65,22 +70,20 @@ public abstract class Enemy extends Entity{
 			}
 		}
 		else{
-			this.x=bubble.getX();
-			this.y=bubble.getY();
+			this.x=this.bubble.getX()+this.bubble.getWidth()/2-this.width/2;
+			this.y=this.bubble.getY()+this.bubble.getWidth()/2-this.height/2;
 		}
 		
 	}
 	
-	public void checkCollision(Bubble bubbles){
-		
-		
-		
-		
-		
-		
-		
-		
-		
+	public void checkCollision(Bubble bubble){
+		Rectangle a= new Rectangle((int)this.x,(int)this.y,this.width,this.height);
+		Rectangle b= new Rectangle((int)bubble.getX(),(int)bubble.getY(),(int)bubble.getWidth(),(int)bubble.getWidth());
+		if(a.getBounds2D().intersects(b)){
+			this.bubble=bubble;
+			this.bubble.setFilled(true);
+			this.bubbleTimer.restart();
+		}
 	}
 	
 	
@@ -98,6 +101,21 @@ public abstract class Enemy extends Entity{
 		}
 		
 	}
+	
+	private class BubbleListener implements ActionListener{
+
+		private Enemy enemy;
+		
+		public BubbleListener(Enemy enemy) {
+			this.enemy=enemy;
+		}
+		
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			this.enemy.freeFromBubble();
+		}
+		
+	}
 
 	public void allowMoveChange() {
 		this.moveTimer.stop();
@@ -108,5 +126,10 @@ public abstract class Enemy extends Entity{
 		return this.bubble;
 	}
 	
-	
+	public void freeFromBubble(){
+		this.bubble.setFilled(false);
+		this.bubble.setDie(true);
+		this.bubble=null;
+		this.bubbleTimer.stop();
+	}
 }
