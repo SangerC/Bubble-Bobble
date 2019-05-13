@@ -34,7 +34,6 @@ public class Bullet extends Drawable{
 		else if(this.x<0){
 			this.die=false;
 		}
-		
 	}
 
 	public int getWidth() {

@@ -15,8 +15,11 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+
+import javax.swing.JPanel;
 import javax.swing.Timer;
 import screen.GameFrame;
+import screen.HomeScreen;
 import screen.Level;
 
 public class GameMain {
@@ -39,7 +42,7 @@ public class GameMain {
 
 	public void newGame(int levelNumber) {
 		this.gameFrame.getContentPane().removeAll();
-		this.level=new Level(levelDirectory+"level"+levelNumber+"/level"+levelNumber);
+		this.level=new Level(levelDirectory+"level"+levelNumber+"/level"+levelNumber,this);
 		this.level.setPreferredSize(new Dimension(1280,720));
 		this.gameFrame.add(this.level,BorderLayout.CENTER);
 		this.currentLevel=levelNumber;
@@ -100,6 +103,21 @@ public class GameMain {
 	
 	public void update() {
 		this.level.update();
+		if(this.level.getEnemies().size()==0){
+			this.nextLevel();
+		}
+		if(this.level.getHero().getDie()) {
+			this.level.reset();
+			this.level.getHero().setLife(this.level.getHero().getLife()-1);
+			this.level.getHero().setDie(false);
+			if(this.level.getHero().getLife()==0){
+				this.gameFrame.getContentPane().removeAll();
+				JPanel homeScreen = new HomeScreen(gameFrame);
+				gameFrame.add(homeScreen,BorderLayout.CENTER);
+				gameFrame.revalidate();
+				gameFrame.repaint();
+			}
+		}
 	}	
 	
 	public void draw() {
@@ -123,5 +141,9 @@ public class GameMain {
 
 	public Level getLevel() {
 		return this.level;
+	}
+	
+	public int getCurrentLevel() {
+		return this.currentLevel;
 	}
 }

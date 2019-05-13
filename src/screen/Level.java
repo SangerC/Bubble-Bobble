@@ -21,6 +21,8 @@ import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.JPanel;
+import javax.swing.Timer;
+
 import drawables.Bubble;
 import drawables.Bullet;
 import drawables.Enemy;
@@ -29,6 +31,7 @@ import drawables.Fruit;
 import drawables.Hero;
 import drawables.Inquisitor;
 import drawables.Obstacle;
+import main.GameMain;
 
 public class Level extends JPanel{
 
@@ -42,9 +45,14 @@ public class Level extends JPanel{
 	private Hero hero;
 	private double heroStartX;
 	private double heroStartY;
+	private Timer youDiedTimer;
+	private boolean youDied;
+	private GameMain gameMain;
 	
-	public Level(String fileName){
+	
+	public Level(String fileName,GameMain gameMain){
 		FileReader file=null;
+		this.gameMain=gameMain;
 		try {
 			file = new FileReader(fileName);
 		} catch (FileNotFoundException e) {
@@ -161,6 +169,11 @@ public class Level extends JPanel{
 		for(Fruit fill :this.fruits){
 			fill.draw(g2);
 		}
+		drawLevelInfo(g2);
+		if(youDied){
+			g2.setColor(Color.red);
+			g2.drawString("You Died", 800, 500);
+		}
 	}	
 	public Hero getHero() {
 		return this.hero;
@@ -171,14 +184,6 @@ public class Level extends JPanel{
 		ArrayList<Bullet> bulletsToRemove = new ArrayList<Bullet>();
 		ArrayList<Fruit> fruitToRemove = new ArrayList<Fruit>();
 		this.hero.update();
-		if(this.hero.getDie()) {
-			this.hero.move(this.heroStartX, this.heroStartY);
-			this.hero.setLife(this.hero.getLife()-1);
-			this.hero.setDie(false);
-			if(this.hero.getLife()==0) {
-				System.out.println("Game Over");
-			}
-		}
 		for(Fruit fruit: this.fruits) {
 			fruit.update();
 			if(fruit.getDie()) {
@@ -216,14 +221,15 @@ public class Level extends JPanel{
 		for(Enemy en : enemiesToRemove){
 			this.enemies.remove(en);
 		}
-		
 	}
 
 	public void checkCollisons() {
 		this.hero.checkCollision(obstacles);
 		for(Enemy en :this.enemies){
 			en.checkCollision(obstacles);
-			this.hero.checkCollision(en);
+			if(this.hero.getVulnerable()){
+				this.hero.checkCollision(en);	
+			}
 			for(Bubble bub:this.bubbles){
 				if(!bub.getFilled()&&en.getBubble()==null) {
 					en.checkCollision(bub);
@@ -234,8 +240,10 @@ public class Level extends JPanel{
 			hero.checkCollision(fill);
 			fill.checkCollision(obstacles);
 		}
-		for(Bullet bill: bullets) {
-			hero.checkCollision(bill);
+		if(this.hero.getVulnerable()) {
+			for(Bullet bill: bullets) {
+				hero.checkCollision(bill);
+			}
 		}
 	}
 
@@ -254,5 +262,16 @@ public class Level extends JPanel{
 
 	public void addFruit(Fruit fruit) {
 		this.fruits.add(fruit);
+	}
+	public ArrayList<Enemy> getEnemies(){
+		return this.enemies;
+	}
+
+	public void reset() {
+		this.hero.move(this.heroStartX, this.heroStartY);
+	}
+	private void drawLevelInfo(Graphics2D g2){
+		g2.setColor(Color.black);
+		g2.drawString("Level: "+this.gameMain.getCurrentLevel()+"        Score: "+this.hero.getScore()+"        Lives:"+this.hero.getLife(), 10, 30);
 	}
 }

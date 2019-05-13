@@ -3,8 +3,11 @@ package drawables;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import javax.swing.Timer;
 
 public class Hero extends Entity{
+	
+	protected static final int INVULNERABILITYDELAY = 2000;
 	
 	private int keyPressed;
 	private int score;
@@ -17,6 +20,7 @@ public class Hero extends Entity{
 		this.height = 40;
 		this.width =25;
 		this.life=5;
+		this.invulnerableTimer=new Timer(INVULNERABILITYDELAY, new InvulnerabilityListener(this));
 	}
 	@Override
 	public void draw(Graphics2D g2) {
@@ -68,8 +72,8 @@ public class Hero extends Entity{
 		Rectangle a= new Rectangle((int)this.x,(int)this.y,this.width,this.height);
 		Rectangle b= new Rectangle((int)enemy.getX(),(int)enemy.getY(),(int)enemy.getWidth(),(int)enemy.getHeight());
 		if(a.getBounds2D().intersects(b)){
-			if(enemy.getBubble()==null&&!this.die) {
-				this.die=true;
+			if(enemy.getBubble()==null) {
+				this.die();
 			}
 			else {
 				enemy.die();
@@ -79,9 +83,17 @@ public class Hero extends Entity{
 	public void checkCollision(Bullet bill) {
 		Rectangle h = new Rectangle((int)this.getX(), (int)this.getY(), this.width, this.height);
 		Rectangle b = new Rectangle((int)bill.getX(), (int)bill.getY(), bill.getWidth(), bill.getWidth());
-		if(h.getBounds().intersects(b)&& this.die==false) {
-			this.die=true;
+		if(h.getBounds().intersects(b)) {
+			this.die();
 			bill.setDie(true);
 		}
+	}
+	private void die(){
+		this.die=true;
+		this.vulnerable=false;
+		this.invulnerableTimer.restart();
+	}
+	public int getScore(){
+		return this.score;
 	}
 }

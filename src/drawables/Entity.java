@@ -137,8 +137,30 @@ public abstract class Entity extends Drawable{
 			this.character.stopJumpTimer();
 		}
 	}
-	
+	protected class InvulnerabilityListener implements ActionListener{
+		
+		private Entity character;
+		
+		public InvulnerabilityListener(Entity character){
+			this.character=character;
+		}
+		
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			this.character.setVulnerable(true);
+			this.character.stopInvlnerabilityTimer();
+		}
+	}
 	public boolean getIsFalling() {
 		return this.isFalling;
+	}
+	public void stopInvlnerabilityTimer() {
+		this.invulnerableTimer.stop();
+	}
+	public void setVulnerable(boolean vulnerable) {
+		this.vulnerable=vulnerable;
+	}
+	public boolean getVulnerable(){
+		return this.vulnerable;
 	}
 }
