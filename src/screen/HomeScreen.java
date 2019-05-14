@@ -1,5 +1,7 @@
 package screen;
 
+import java.awt.BorderLayout;
+
 /**
  * The home screen class for the arcade game.
  * 
@@ -13,13 +15,17 @@ package screen;
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
+
 import main.GameMain;
 
 
@@ -38,6 +44,7 @@ public class HomeScreen extends JPanel{
 		defaultButtonLayout();
 		this.setPreferredSize(new Dimension(1280,720));
 		this.setBackground(backgroundColor);
+		makeTitle();
 	}
 	
 	private void defaultButtonLayout(){
@@ -53,5 +60,15 @@ public class HomeScreen extends JPanel{
 		for(JButton b: buttons) {
 			this.add(b,c);
 		}
+	}
+	
+	private void makeTitle() {
+		JLabel title = new JLabel("Bubble Bobble");
+		title.setHorizontalAlignment(JLabel.CENTER);
+		title.setFont(new Font("TimesRoman",Font.BOLD,45));
+		title.setForeground(Color.red);
+		title.setBackground(this.backgroundColor);
+		title.setOpaque(true);
+		gameFrame.add(title,BorderLayout.NORTH);
 	}
 }

@@ -3,6 +3,8 @@ package drawables;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.util.Random;
+
 import javax.swing.Timer;
 
 public class Hero extends Entity{
@@ -24,9 +26,12 @@ public class Hero extends Entity{
 	}
 	@Override
 	public void draw(Graphics2D g2) {
+		Random rand = new Random();
 		g2.translate(this.x, this.y);
-		g2.setColor(Color.black);
-		g2.fillRect(0,0,this.width,this.height);
+		if(this.vulnerable||rand.nextInt(10)>1) {
+			g2.setColor(Color.black);
+			g2.fillRect(0,0,this.width,this.height);
+		}
 		g2.translate(-this.x, -this.y);
 	}
 	@Override
