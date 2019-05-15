@@ -13,6 +13,7 @@ public class Bubble extends Drawable{
 	private static final double BUBBLEWIDTH=70;
 	private static final double BUBBLEFLOATSPEED=2;
 	private static final int MOVEDELAY=500;
+	private static final int POPDELAY=200;
 	
 	private double width;
 	private double bubbleSpeed;
@@ -22,6 +23,7 @@ public class Bubble extends Drawable{
 	private Color bubbleColor;
 	private Color bubbleFillColor;
 	private Timer movingTimer;
+	private Timer popTimer;
 
 	public Bubble(double x, double y, Color bubbleColor, boolean right, double bubbleSpeed) {
 		super(x, y);
@@ -36,6 +38,7 @@ public class Bubble extends Drawable{
 		}
 		this.bubbleFillColor=new Color(this.bubbleColor.getRed(),this.bubbleColor.getGreen(),this.bubbleColor.getBlue(),165);
 		this.movingTimer = new Timer(MOVEDELAY,new MoveListener(this));
+		this.popTimer = new Timer(POPDELAY,new PopListener(this));
 		this.movingTimer.start();
 	}
 
@@ -69,6 +72,9 @@ public class Bubble extends Drawable{
 					this.die=true;
 				}
 			}
+			else {
+				//popTimer.start();
+			}
 		}
 	}
 	
@@ -86,9 +92,24 @@ public class Bubble extends Drawable{
 		}	
 	}
 	
+	private class PopListener implements ActionListener{
+		
+		private Bubble bubble;
+		
+		public PopListener(Bubble bubble){
+			this.bubble=bubble;
+		}
+		
+		@Override
+		public void actionPerformed(ActionEvent arg0) {
+			this.bubble.setDie(true);
+		}	
+	}
+	
 	public void stopMoving(){
 		this.moving=false;
 		this.movingTimer.stop();
+		this.filled=true;
 	}
 	
 	public double getWidth() {

@@ -72,6 +72,7 @@ public abstract class Enemy extends Entity{
 		else{
 			this.x=this.bubble.getX()+this.bubble.getWidth()/2-this.width/2;
 			this.y=this.bubble.getY()+this.bubble.getWidth()/2-this.height/2;
+			System.out.println(this.bubble.getDie());
 		}
 		
 	}

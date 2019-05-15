@@ -18,6 +18,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -31,7 +32,6 @@ import main.GameMain;
 
 public class HomeScreen extends JPanel{
 	
-	private ArrayList<JButton> buttons;
 	private Color backgroundColor = Color.DARK_GRAY;
 	private GameFrame gameFrame;
 	private GridBagConstraints c;
@@ -39,8 +39,8 @@ public class HomeScreen extends JPanel{
 	public HomeScreen(GameFrame gameFrame){
 		super(new GridBagLayout());
 		this.c = new GridBagConstraints();
+		c.fill=GridBagConstraints.VERTICAL;
 		this.gameFrame=gameFrame;
-		this.buttons = new ArrayList<JButton>();
 		defaultButtonLayout();
 		this.setPreferredSize(new Dimension(1280,720));
 		this.setBackground(backgroundColor);
@@ -49,17 +49,21 @@ public class HomeScreen extends JPanel{
 	
 	private void defaultButtonLayout(){
 		JButton playButton = new JButton("Play");
+		JButton controlsButton = new JButton("Controls");
 		playButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				GameMain gameMain = new GameMain(gameFrame);
 			}		
-			
 		});
-		this.buttons.add(playButton);
-		for(JButton b: buttons) {
-			this.add(b,c);
-		}
+		c.gridx = 0;
+		c.gridy = 1;
+		this.add(playButton,c);
+		c.gridx = 0;
+		c.gridy = 2;
+		c.insets = new Insets(40,0,0,0);
+		this.add(controlsButton,c);
+
 	}
 	
 	private void makeTitle() {
