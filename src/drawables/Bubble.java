@@ -4,7 +4,8 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.geom.Point2D;
+import java.awt.geom.Area;
+import java.awt.geom.Ellipse2D;
 
 import javax.swing.Timer;
 
@@ -13,7 +14,7 @@ public class Bubble extends Drawable{
 	private static final double BUBBLEWIDTH=70;
 	private static final double BUBBLEFLOATSPEED=2;
 	private static final int MOVEDELAY=500;
-	private static final int POPDELAY=200;
+	private static final int POPDELAY=7000;
 	
 	private double width;
 	private double bubbleSpeed;
@@ -73,7 +74,7 @@ public class Bubble extends Drawable{
 				}
 			}
 			else {
-				//popTimer.start();
+				popTimer.start();
 			}
 		}
 	}
@@ -122,5 +123,8 @@ public class Bubble extends Drawable{
 	
 	public void setFilled(boolean filled) {
 		this.filled=filled;
+	}
+	public Area getArea(){
+		return new Area(new Ellipse2D.Double(this.x,this.y,this.width,this.width));
 	}
 }

@@ -2,6 +2,8 @@ package drawables;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.geom.Area;
+import java.awt.geom.Ellipse2D;
 
 public class Bullet extends Drawable{
 
@@ -38,5 +40,9 @@ public class Bullet extends Drawable{
 
 	public int getWidth() {
 		return this.width;
+	}
+	
+	public Area getArea(){
+		return new Area(new Ellipse2D.Double(this.x,this.y,this.width,this.width));
 	}
 }

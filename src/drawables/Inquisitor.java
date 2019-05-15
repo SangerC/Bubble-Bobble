@@ -2,6 +2,8 @@ package drawables;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.geom.Area;
+import java.awt.geom.Ellipse2D;
 import java.util.Random;
 
 import screen.Level;
@@ -10,7 +12,6 @@ public class Inquisitor extends Enemy{
 
 	public Inquisitor(double x, double y, double speed, double fallSpeed, double jumpSpeed, Level level) {
 		super(x, y, speed, fallSpeed, jumpSpeed, level);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -33,6 +34,10 @@ public class Inquisitor extends Enemy{
 			}
 			
 		}
+	}
+	
+	public Area getArea(){
+		return new Area(new Ellipse2D.Double(this.x,this.y,this.width,this.height));
 	}
 
 }

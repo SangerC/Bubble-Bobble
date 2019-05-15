@@ -3,6 +3,7 @@ package drawables;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.geom.Area;
 import java.util.Random;
 
 import javax.swing.Timer;
@@ -65,18 +66,13 @@ public class Hero extends Entity{
 		return this.life;
 	}
 	public void checkCollision(Fruit fruit) {
-		Rectangle h= new Rectangle((int)this.x, (int)this.y, this.width, this.height);
-		Rectangle f = new Rectangle((int)fruit.getX(), (int) fruit.getY(), (int)fruit.getWidth(), (int)fruit.getHeight());
-		if(h.getBounds2D().intersects(f)&&!fruit.isFalling) {
+		if(this.getArea().getBounds2D().intersects(fruit.getArea().getBounds2D())&&!fruit.isFalling) {
 			fruit.setDie(true);
 			this.score+=fruit.getScore();
-			System.out.println("Score = "+this.score);
 		}
 	}
 	public void checkCollision(Enemy enemy){
-		Rectangle a= new Rectangle((int)this.x,(int)this.y,this.width,this.height);
-		Rectangle b= new Rectangle((int)enemy.getX(),(int)enemy.getY(),(int)enemy.getWidth(),(int)enemy.getHeight());
-		if(a.getBounds2D().intersects(b)){
+		if(this.getArea().getBounds2D().intersects(enemy.getArea().getBounds2D())){
 			if(enemy.getBubble()==null) {
 				this.die();
 			}
@@ -86,9 +82,7 @@ public class Hero extends Entity{
 		}
 	}
 	public void checkCollision(Bullet bill) {
-		Rectangle h = new Rectangle((int)this.getX(), (int)this.getY(), this.width, this.height);
-		Rectangle b = new Rectangle((int)bill.getX(), (int)bill.getY(), bill.getWidth(), bill.getWidth());
-		if(h.getBounds().intersects(b)) {
+		if(this.getArea().getBounds2D().intersects(bill.getArea().getBounds2D())) {
 			this.die();
 			bill.setDie(true);
 		}
@@ -100,5 +94,8 @@ public class Hero extends Entity{
 	}
 	public int getScore(){
 		return this.score;
+	}
+	public Area getArea() {
+		return new Area(new Rectangle((int)this.x,(int)this.y,this.width,this.height));
 	}
 }

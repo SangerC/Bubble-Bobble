@@ -1,10 +1,7 @@
 package drawables;
 
-import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.geom.Area;
-import java.util.ArrayList;
 import java.util.Random;
 import javax.swing.Timer;
 import screen.Level;
@@ -24,7 +21,8 @@ import screen.Level;
 public abstract class Enemy extends Entity{
 	
 	private static final int MOVEDELAY =2000;
-	private static final int BUBBLEDELAY =6000;
+	private static final int BUBBLEDELAY =4000;
+	private static final int VULNERABILITYDELAY =1000;
 	
 	private Timer moveTimer;
 	private Timer bubbleTimer;
@@ -40,6 +38,7 @@ public abstract class Enemy extends Entity{
 		this.moveTimer=new Timer(MOVEDELAY,new MoveListener(this));
 		this.bubbleTimer=new Timer(BUBBLEDELAY,new BubbleListener(this));
 		this.level=level;
+		this.invulnerableTimer=new Timer(VULNERABILITYDELAY, new InvulnerabilityListener(this));
 	}
 	
 	@Override
@@ -72,15 +71,12 @@ public abstract class Enemy extends Entity{
 		else{
 			this.x=this.bubble.getX()+this.bubble.getWidth()/2-this.width/2;
 			this.y=this.bubble.getY()+this.bubble.getWidth()/2-this.height/2;
-			System.out.println(this.bubble.getDie());
 		}
 		
 	}
 	
 	public void checkCollision(Bubble bubble){
-		Rectangle a= new Rectangle((int)this.x,(int)this.y,this.width,this.height);
-		Rectangle b= new Rectangle((int)bubble.getX(),(int)bubble.getY(),(int)bubble.getWidth(),(int)bubble.getWidth());
-		if(a.getBounds2D().intersects(b)){
+		if(this.getArea().getBounds2D().intersects(bubble.getArea().getBounds2D())){
 			this.bubble=bubble;
 			this.bubble.setFilled(true);
 			this.bubbleTimer.restart();
@@ -133,6 +129,8 @@ public abstract class Enemy extends Entity{
 		this.bubble=null;
 		this.bubbleTimer.stop();
 		this.isFalling=true;
+		this.vulnerable=false;
+		this.invulnerableTimer.restart();
 	}
 	public void die() {
 		Random rand = new Random(); 

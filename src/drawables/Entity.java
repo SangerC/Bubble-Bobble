@@ -2,6 +2,7 @@ package drawables;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.Area;
 import java.util.ArrayList;
 import javax.swing.Timer;
 
@@ -163,4 +164,5 @@ public abstract class Entity extends Drawable{
 	public boolean getVulnerable(){
 		return this.vulnerable;
 	}
+	public abstract Area getArea();
 }

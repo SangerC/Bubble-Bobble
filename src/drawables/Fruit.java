@@ -2,6 +2,10 @@ package drawables;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
+import java.awt.geom.Area;
+import java.awt.geom.Ellipse2D;
+
 import javax.swing.Timer;
 
 public class Fruit extends Entity{
@@ -28,6 +32,10 @@ public class Fruit extends Entity{
 	
 	public int getScore() {
 		return this.score;
+	}
+	
+	public Area getArea(){
+		return new Area(new Rectangle((int)this.x,(int)this.y,this.width,this.height));
 	}
 	
 }

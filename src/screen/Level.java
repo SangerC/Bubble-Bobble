@@ -231,7 +231,7 @@ public class Level extends JPanel{
 				this.hero.checkCollision(en);	
 			}
 			for(Bubble bub:this.bubbles){
-				if(!bub.getFilled()&&en.getBubble()==null) {
+				if(!bub.getFilled()&&en.getBubble()==null&&en.getVulnerable()) {
 					en.checkCollision(bub);
 				}
 			}
