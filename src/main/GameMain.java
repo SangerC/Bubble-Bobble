@@ -34,9 +34,11 @@ public class GameMain {
 	private int currentLevel;
 	private boolean paused=false;
 	private Timer timer;
+	private String heroFolder;
 
-	public GameMain(GameFrame gameFrame) {
+	public GameMain(GameFrame gameFrame, String heroFolder) {
 		this.gameFrame=gameFrame;
+		this.heroFolder=heroFolder;
 		this.newGame(0);
 	}
 
