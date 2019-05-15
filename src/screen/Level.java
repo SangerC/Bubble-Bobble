@@ -78,7 +78,9 @@ public class Level extends JPanel{
 									 Double.valueOf(readParameter(setting,1)),
 									 Double.valueOf(readParameter(setting,2)),
 									 Double.valueOf(readParameter(setting,3)),
-									 Double.valueOf(readParameter(setting,4)));
+									 Double.valueOf(readParameter(setting,4)),
+									 this,
+									 "/assests/heroes/adventurer");
 				this.heroStartX= Double.valueOf(readParameter(setting,0));
 				this.heroStartY=Double.valueOf(readParameter(setting,1));
 			}

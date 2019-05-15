@@ -8,6 +8,9 @@ import java.util.Random;
 
 import javax.swing.Timer;
 
+import animations.Sprite;
+import screen.Level;
+
 public class Hero extends Entity{
 	
 	protected static final int INVULNERABILITYDELAY = 2000;
@@ -18,20 +21,22 @@ public class Hero extends Entity{
 	private double bubbleSpeed=5;
 	private int life;
 
-	public Hero(double x, double y, double speed, double fallSpeed, double jumpSpeed) {
+	public Hero(double x, double y, double speed, double fallSpeed, double jumpSpeed, Level level, String animationFolder) {
 		super(x, y, speed, fallSpeed, jumpSpeed);
 		this.height = 40;
 		this.width =25;
 		this.life=5;
 		this.invulnerableTimer=new Timer(INVULNERABILITYDELAY, new InvulnerabilityListener(this));
+		this.sprite=new Sprite(animationFolder,level);
 	}
 	@Override
 	public void draw(Graphics2D g2) {
 		Random rand = new Random();
 		g2.translate(this.x, this.y);
 		if(this.vulnerable||rand.nextInt(10)>1) {
-			g2.setColor(Color.black);
-			g2.fillRect(0,0,this.width,this.height);
+			this.sprite.draw(g2);
+//			g2.setColor(Color.black);
+//			g2.fillRect(0,0,this.width,this.height);
 		}
 		g2.translate(-this.x, -this.y);
 	}
@@ -46,6 +51,38 @@ public class Hero extends Entity{
 				break;
 		}
 		super.update();
+		updateAnimation();
+	}
+	private void updateAnimation(){
+		if(this.sprite.getCurrentAnimation().equals("die")
+			&&this.sprite.getCurrentAnimationIndex()==this.sprite.getAnimations().get(this.sprite.getCurrentAnimation()).size()-1){
+			this.die();
+		}
+		else if(this.sprite.getCurrentAnimation().equals("shoot")
+				&&this.sprite.getCurrentAnimationIndex()==this.sprite.getAnimations().get(this.sprite.getCurrentAnimation()).size()-1){
+			this.sprite.setCurrentAnimation("idle");
+		}
+		else if(this.sprite.getCurrentAnimation().equals("shoot")
+				&&this.sprite.getCurrentAnimationIndex()==this.sprite.getAnimations().get(this.sprite.getCurrentAnimation()).size()-1){
+			this.sprite.setCurrentAnimation("idle");
+		}
+		if(this.sprite.getCurrentAnimation()!="shoot"&&this.sprite.getCurrentAnimation()!="die") {
+			if(this.isFalling&&this.sprite.getCurrentAnimation()!="fall") {
+				this.sprite.setCurrentAnimation("fall");
+			}
+			else if(keyPressed!=0){
+				if(this.facingRight&&this.sprite.getCurrentAnimation()!="runRight") {
+					this.sprite.setCurrentAnimation("runRight");
+				}
+				else if(!this.facingRight&&this.sprite.getCurrentAnimation()!="runLeft") {
+					this.sprite.setCurrentAnimation("runLeft");
+				}
+			}
+			else{
+				this.sprite.setCurrentAnimation("idle");
+			}
+		}
+		this.sprite.update();
 	}
 	public void setKeyPressed(int keyCode) {
 		this.keyPressed=keyCode;
@@ -74,7 +111,8 @@ public class Hero extends Entity{
 	public void checkCollision(Enemy enemy){
 		if(this.getArea().getBounds2D().intersects(enemy.getArea().getBounds2D())){
 			if(enemy.getBubble()==null) {
-				this.die();
+				this.sprite.setCurrentAnimation("die");
+				this.invulnerableTimer.restart();
 			}
 			else {
 				enemy.die();
@@ -83,7 +121,8 @@ public class Hero extends Entity{
 	}
 	public void checkCollision(Bullet bill) {
 		if(this.getArea().getBounds2D().intersects(bill.getArea().getBounds2D())) {
-			this.die();
+			this.sprite.setCurrentAnimation("die");
+			this.invulnerableTimer.restart();
 			bill.setDie(true);
 		}
 	}

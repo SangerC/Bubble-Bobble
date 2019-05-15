@@ -6,6 +6,8 @@ import java.awt.geom.Area;
 import java.util.ArrayList;
 import javax.swing.Timer;
 
+import animations.Sprite;
+
 /**
  * The character creation class for the arcade game.
  * 
@@ -29,6 +31,7 @@ public abstract class Entity extends Drawable{
 	protected boolean isJumping;
 	protected boolean facingRight;
 	protected boolean vulnerable;
+	protected Sprite sprite;
 	protected int height;
 	protected int width;
 	protected Timer jumpTimer;
@@ -117,6 +120,9 @@ public abstract class Entity extends Drawable{
 		if(!isFalling){
 			this.isJumping=true;
 			jumpTimer.start();
+			if(this.sprite!=null){
+				this.sprite.setCurrentAnimation("jump");
+			}
 		}
 	}
 

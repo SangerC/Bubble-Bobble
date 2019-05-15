@@ -5,44 +5,43 @@ import java.awt.Image;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+
 import javax.imageio.ImageIO;
 import screen.Level;
 
 public class Sprite {
 	
-	private ArrayList<Image> idle;
-	private ArrayList<Image> runRight;
-	private ArrayList<Image> runLeft;
-	private ArrayList<Image> die;
-	private ArrayList<Image> shoot;
-	private ArrayList<Image> jump;
-	private ArrayList<Image> fall;
-	private ArrayList<Image> currentAnimation;
+	private String currentAnimation;
+	private HashMap<String,ArrayList<Image>> animations;
 	private int currentAnimationIndex;
 	private Level level;
 	
 	public Sprite(String FolderName, Level level) {
+		this.animations = new HashMap<String,ArrayList<Image>>();
 		
-		this.idle=new ArrayList<Image>();
-		addAnimation(FolderName+"/idle",this.idle);
+		ArrayList<Image> idle=new ArrayList<Image>();
+		addAnimation(FolderName+"/idle",idle);
+		animations.put("idle",idle);
 		
-		this.runRight=new ArrayList<Image>();
-		addAnimation(FolderName+"/runRight",this.runRight);
+		ArrayList<Image> runRight=new ArrayList<Image>();
+		addAnimation(FolderName+"/runRight",runRight);
+		animations.put("runRight",runRight);
 		
-		this.runLeft=new ArrayList<Image>();
-		addAnimation(FolderName+"/runLeft",this.runLeft);
+		ArrayList<Image> runLeft=new ArrayList<Image>();
+		addAnimation(FolderName+"/runLeft",runLeft);
 		
-		this.die=new ArrayList<Image>();
-		addAnimation(FolderName+"/die",this.die);
+		ArrayList<Image> die=new ArrayList<Image>();
+		addAnimation(FolderName+"/die",die);
 		
-		this.shoot=new ArrayList<Image>();
-		addAnimation(FolderName+"/shoot",this.shoot);
+		ArrayList<Image> shoot=new ArrayList<Image>();
+		addAnimation(FolderName+"/shoot",shoot);
 		
-		this.jump=new ArrayList<Image>();
-		addAnimation(FolderName+"/jump",this.jump);
+		ArrayList<Image> jump=new ArrayList<Image>();
+		addAnimation(FolderName+"/jump",jump);
 		
-		this.fall=new ArrayList<Image>();
-		addAnimation(FolderName+"/fall",this.fall);
+		ArrayList<Image> fall=new ArrayList<Image>();
+		addAnimation(FolderName+"/fall",fall);
 		
 		this.currentAnimationIndex=0;
 		this.level=level;
@@ -61,41 +60,34 @@ public class Sprite {
 	}
 	
 	public void draw(Graphics2D g2){
-		g2.drawImage(currentAnimation.get(currentAnimationIndex),0,0,level);
+		g2.drawImage(this.animations.get(this.currentAnimation).get(this.currentAnimationIndex),0,0,level);
 	}
 
 	public void update(){
-		if(this.currentAnimationIndex==this.currentAnimation.size()-1) {
+		if(this.currentAnimationIndex==this.animations.get(this.currentAnimation).size()-1&&!this.currentAnimation.equals("die")&&!this.currentAnimation.equals("shoot")) {
 			this.currentAnimationIndex=0;
 		}
-		else {
+		else if(this.currentAnimationIndex==this.animations.get(this.currentAnimation).size()-1&&this.currentAnimation.equals("die")&&this.currentAnimation.equals("shoot")){
+
+		}
+		else{
 			this.currentAnimationIndex++;
 		}
 	}
 	
-	public void changeAnimation(String animation){
-		if(animation.equals("idle")) {
-			this.currentAnimation=this.idle;
-		}
-		else if(animation.equals("runRight")) {
-			this.currentAnimation=this.runRight;
-		}
-		else if(animation.equals("runLeft")) {
-			this.currentAnimation=this.runLeft;
-		}
-		else if(animation.equals("die")) {
-			this.currentAnimation=this.die;
-		}
-		else if(animation.equals("shoot")) {
-			this.currentAnimation=this.shoot;
-		}
-		else if(animation.equals("jump")) {
-			this.currentAnimation=this.jump;
-		}
-		else if(animation.equals("fall")) {
-			this.currentAnimation=this.fall;
-		}
-		
+	public void setCurrentAnimation(String animation){
+		this.currentAnimation=animation;
 	}
 	
+	public String getCurrentAnimation() {
+		return this.currentAnimation;
+	}
+	
+	public int getCurrentAnimationIndex() {
+		return this.currentAnimationIndex;
+	}
+	
+	public HashMap<String, ArrayList<Image>> getAnimations(){
+		return this.animations;
+	}
 }
