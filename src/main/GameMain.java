@@ -39,11 +39,13 @@ public class GameMain {
 	private Timer timer;
 	private int lives;
 	private PauseMenu pauseMenu;
+	private String heroFolder;
 
-	public GameMain(GameFrame gameFrame) {
+	public GameMain(GameFrame gameFrame, String heroFolder) {
 		this.gameFrame=gameFrame;
 		this.lives=STARTINGLIVES;
 		this.pauseMenu = new PauseMenu(this);
+		this.heroFolder=heroFolder;
 		this.newGame(0);
 	}
 

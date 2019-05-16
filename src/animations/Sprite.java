@@ -4,19 +4,14 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.geom.AffineTransform;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-
 import javax.imageio.ImageIO;
+import javax.swing.JPanel;
 import javax.swing.Timer;
-
-import drawables.Entity;
-import screen.Level;
 
 public class Sprite {
 	
@@ -26,52 +21,54 @@ public class Sprite {
 	private HashMap<String, ArrayList<Image>> animations;
 	private int currentAnimationIndex;
 	private Timer updateTimer;
-	private Level level;
+	private JPanel observer;
 	private int width;
 	private int height;
+	private String folderName;
 	
-	public Sprite(String FolderName, Level level, int width, int height) {
+	public Sprite(String folderName, JPanel observer, int width, int height) {
 		this.animations = new HashMap<String,ArrayList<Image>>();
+		this.folderName = folderName;
 		
 		ArrayList<Image> idleLeft=new ArrayList<Image>();
-		addAnimation(FolderName+"/idleLeft",idleLeft);
+		addAnimation(folderName+"/idleLeft",idleLeft);
 		animations.put("idleLeft",idleLeft);
 		
 		ArrayList<Image> idleRight=new ArrayList<Image>();
-		addAnimation(FolderName+"/idleRight",idleRight);
+		addAnimation(folderName+"/idleRight",idleRight);
 		animations.put("idleRight",idleRight);
 		
 		ArrayList<Image> runRight=new ArrayList<Image>();
-		addAnimation(FolderName+"/runRight",runRight);
+		addAnimation(folderName+"/runRight",runRight);
 		animations.put("runRight",runRight);
 		
 		ArrayList<Image> runLeft=new ArrayList<Image>();
-		addAnimation(FolderName+"/runLeft",runLeft);
+		addAnimation(folderName+"/runLeft",runLeft);
 		animations.put("runLeft",runLeft);
 		
 		ArrayList<Image> die=new ArrayList<Image>();
-		addAnimation(FolderName+"/die",die);
+		addAnimation(folderName+"/die",die);
 		animations.put("die",die);
 		
 		ArrayList<Image> shootLeft=new ArrayList<Image>();
-		addAnimation(FolderName+"/shootLeft",shootLeft);
+		addAnimation(folderName+"/shootLeft",shootLeft);
 		animations.put("shootLeft",shootLeft);
 		
 		ArrayList<Image> shootRight=new ArrayList<Image>();
-		addAnimation(FolderName+"/shootRight",shootRight);
+		addAnimation(folderName+"/shootRight",shootRight);
 		animations.put("shootRight",shootRight);
 		
 		ArrayList<Image> jump=new ArrayList<Image>();
-		addAnimation(FolderName+"/jump",jump);
+		addAnimation(folderName+"/jump",jump);
 		animations.put("jump",jump);
 		
 		ArrayList<Image> fall=new ArrayList<Image>();
-		addAnimation(FolderName+"/fall",fall);
+		addAnimation(folderName+"/fall",fall);
 		animations.put("fall",fall);
 		
 		this.currentAnimationIndex=0;
 		this.currentAnimation="idleLeft";
-		this.level=level;
+		this.observer=observer;
 		this.width=width;
 		this.height=height;
 		this.updateTimer=new Timer(UPDATEDELAY,new UpdateListener(this));
@@ -92,7 +89,7 @@ public class Sprite {
 	}
 
 	public void draw(Graphics2D g2){
-		g2.drawImage(this.animations.get(this.currentAnimation).get(this.currentAnimationIndex),0,0,this.width,this.height,level);
+		g2.drawImage(this.animations.get(this.currentAnimation).get(this.currentAnimationIndex),0,0,this.width,this.height,observer);
 	}
 
 	public void update(){
@@ -135,5 +132,9 @@ public class Sprite {
 		public void actionPerformed(ActionEvent arg0) {
 			this.sprite.update();
 		}
+	}
+	
+	public String getFolderName() {
+		return this.folderName;
 	}
 }

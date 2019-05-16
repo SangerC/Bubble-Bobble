@@ -53,10 +53,10 @@ public class HomeScreen extends JPanel{
 		playButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
-				GameMain gameMain = new GameMain(gameFrame);
+				CharacterSelectionScreen charselect = new CharacterSelectionScreen(gameFrame);
 			}		
 		});
-		playButton.addActionListener(new ControlsListener(this.gameFrame,this));
+		controlsButton.addActionListener(new ControlsListener(this.gameFrame,this));
 		c.gridx = 0;
 		c.gridy = 1;
 		this.add(playButton,c);
