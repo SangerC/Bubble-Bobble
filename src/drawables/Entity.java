@@ -31,6 +31,7 @@ public abstract class Entity extends Drawable{
 	protected boolean isJumping;
 	protected boolean facingRight;
 	protected boolean vulnerable;
+	protected boolean canAct;
 	protected Sprite sprite;
 	protected int height;
 	protected int width;
@@ -171,4 +172,10 @@ public abstract class Entity extends Drawable{
 		return this.vulnerable;
 	}
 	public abstract Area getArea();
+	public void setCanAct(boolean canAct) {
+		this.canAct=canAct;
+	}
+	public boolean getCanAct() {
+		return this.canAct;
+	}
 }

@@ -32,13 +32,19 @@ public class HeroListener implements KeyListener{
 			this.gameMain.togglePause();
 			break;
 		case(37)://left arrow
-			this.hero.setKeyPressed(37);
+			if(this.hero.getCanAct()) {
+				this.hero.setKeyPressed(37);
+			}
 			break;
 		case(39)://right arrow
-			this.hero.setKeyPressed(39);
+			if(this.hero.getCanAct()) {
+				this.hero.setKeyPressed(39);
+			}
 			break;
 		case(38)://up arrow
-			this.hero.jump();
+			if(this.hero.getCanAct()) {
+				this.hero.jump();
+			}
 			break;
 		case(40)://down arrow
 			break;
@@ -49,7 +55,9 @@ public class HeroListener implements KeyListener{
 			this.gameMain.previousLevel();
 			break;
 		case(32)://spacebar
-			this.gameMain.getLevel().blowBubble();
+			if(this.hero.getCanAct()) {
+				this.gameMain.getLevel().blowBubble();
+			}
 			break;
 		}
 	}

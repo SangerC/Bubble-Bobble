@@ -42,7 +42,7 @@ public abstract class Enemy extends Entity{
 	}
 	
 	@Override
-	public void update() {
+	public void update(){
 		if(this.bubble==null){
 			super.update();
 			Random rand = new Random(); 

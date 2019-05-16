@@ -56,6 +56,7 @@ public class HomeScreen extends JPanel{
 				GameMain gameMain = new GameMain(gameFrame);
 			}		
 		});
+		playButton.addActionListener(new ControlsListener(this.gameFrame,this));
 		c.gridx = 0;
 		c.gridy = 1;
 		this.add(playButton,c);

@@ -35,6 +35,8 @@ import main.GameMain;
 
 public class Level extends JPanel{
 
+	private static final int HEROBUBBLEOFFSET = 40;
+	
 	private ArrayList<Enemy> enemies;
 	private ArrayList<Obstacle> obstacles;
 	private ArrayList<Bubble> bubbles;
@@ -45,7 +47,6 @@ public class Level extends JPanel{
 	private Hero hero;
 	private double heroStartX;
 	private double heroStartY;
-	private Timer youDiedTimer;
 	private boolean youDied;
 	private GameMain gameMain;
 	
@@ -80,7 +81,7 @@ public class Level extends JPanel{
 									 Double.valueOf(readParameter(setting,3)),
 									 Double.valueOf(readParameter(setting,4)),
 									 this,
-									 "/assests/heroes/adventurer");
+									 "assests/heroes/adventurer");
 				this.heroStartX= Double.valueOf(readParameter(setting,0));
 				this.heroStartY=Double.valueOf(readParameter(setting,1));
 			}
@@ -151,7 +152,7 @@ public class Level extends JPanel{
 		return null;
 	}
 	@Override
-	public void paintComponent(Graphics g) {
+	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 		Graphics2D g2 = (Graphics2D) g;
 		g.drawImage(this.backgroundImage, 0, 0,this);
@@ -177,7 +178,7 @@ public class Level extends JPanel{
 			g2.drawString("You Died", 800, 500);
 		}
 	}	
-	public Hero getHero() {
+	public Hero getHero(){
 		return this.hero;
 	}
 	public void update(){
@@ -186,9 +187,9 @@ public class Level extends JPanel{
 		ArrayList<Bullet> bulletsToRemove = new ArrayList<Bullet>();
 		ArrayList<Fruit> fruitToRemove = new ArrayList<Fruit>();
 		this.hero.update();
-		for(Fruit fruit: this.fruits) {
+		for(Fruit fruit: this.fruits){
 			fruit.update();
-			if(fruit.getDie()) {
+			if(fruit.getDie()){
 				fruitToRemove.add(fruit);
 			}
 		}
@@ -206,7 +207,7 @@ public class Level extends JPanel{
 		}
 		for(Enemy en :this.enemies){
 			en.update();
-			if(en.getDie()) {
+			if(en.getDie()){
 				enemiesToRemove.add(en);
 			}
 		
@@ -225,7 +226,7 @@ public class Level extends JPanel{
 		}
 	}
 
-	public void checkCollisons() {
+	public void checkCollisons(){
 		this.hero.checkCollision(obstacles);
 		for(Enemy en :this.enemies){
 			en.checkCollision(obstacles);
@@ -249,31 +250,33 @@ public class Level extends JPanel{
 		}
 	}
 
-	public void blowBubble() {
+	public void blowBubble(){
 		if(this.hero.getFacingRight()){
-			this.bubbles.add(new Bubble(this.hero.getX()+this.hero.getWidth(),this.hero.getY()-this.hero.getHeight()/2,this.hero.getBubbleColor(),true,this.hero.getBubbleSpeed()));
+			this.hero.getSprite().setCurrentAnimation("shootRight");
+			this.bubbles.add(new Bubble(this.hero.getX()+HEROBUBBLEOFFSET,this.hero.getY(),this.hero.getBubbleColor(),true,this.hero.getBubbleSpeed()));
 		}
 		else{
-			this.bubbles.add(new Bubble(this.hero.getX()-this.hero.getWidth(),this.hero.getY()-this.hero.getHeight()/2,this.hero.getBubbleColor(),false,this.hero.getBubbleSpeed()));
+			this.hero.getSprite().setCurrentAnimation("shootLeft");
+			this.bubbles.add(new Bubble(this.hero.getX(),this.hero.getY(),this.hero.getBubbleColor(),false,this.hero.getBubbleSpeed()));
 		}
 	}
 	
-	public void addBullet(Bullet bill) {
+	public void addBullet(Bullet bill){
 		this.bullets.add(bill);
 	}
 
-	public void addFruit(Fruit fruit) {
+	public void addFruit(Fruit fruit){
 		this.fruits.add(fruit);
 	}
 	public ArrayList<Enemy> getEnemies(){
 		return this.enemies;
 	}
 
-	public void reset() {
+	public void reset(){
 		this.hero.move(this.heroStartX, this.heroStartY);
 	}
 	private void drawLevelInfo(Graphics2D g2){
 		g2.setColor(Color.black);
-		g2.drawString("Level: "+this.gameMain.getCurrentLevel()+"        Score: "+this.hero.getScore()+"        Lives:"+this.hero.getLife(), 10, 30);
+		g2.drawString("Level: "+this.gameMain.getCurrentLevel()+"        Score: "+this.hero.getScore()+"        Lives:"+this.gameMain.getLives(), 10, 30);
 	}
 }

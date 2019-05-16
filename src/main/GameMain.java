@@ -21,29 +21,36 @@ import javax.swing.Timer;
 import screen.GameFrame;
 import screen.HomeScreen;
 import screen.Level;
+import screen.PauseMenu;
 
 public class GameMain {
 	
 	private static final int DELAY = 16;
 	private static final String levelDirectory = "levels/";
-	private static final int frameXSize = 1280;
-	private static final int frameYSize = 720;
+	private static final int FRAMEXSIZE = 1280;
+	private static final int FRAMEYSIZE = 720;
+	private static final int STARTINGLIVES = 5;
+	
 	private GameFrame gameFrame;
 	private Level level;
 	private HeroListener heroListener;
 	private int currentLevel;
 	private boolean paused=false;
 	private Timer timer;
+	private int lives;
+	private PauseMenu pauseMenu;
 
 	public GameMain(GameFrame gameFrame) {
 		this.gameFrame=gameFrame;
+		this.lives=STARTINGLIVES;
+		this.pauseMenu = new PauseMenu(this);
 		this.newGame(0);
 	}
 
 	public void newGame(int levelNumber) {
 		this.gameFrame.getContentPane().removeAll();
 		this.level=new Level(levelDirectory+"level"+levelNumber+"/level"+levelNumber,this);
-		this.level.setPreferredSize(new Dimension(1280,720));
+		this.level.setPreferredSize(new Dimension(FRAMEXSIZE,FRAMEYSIZE));
 		this.gameFrame.add(this.level,BorderLayout.CENTER);
 		this.currentLevel=levelNumber;
 		this.gameFrame.revalidate();
@@ -89,10 +96,19 @@ public class GameMain {
 	public void togglePause() {
 		if(this.paused){
 			this.paused=false;
+			this.gameFrame.remove(this.pauseMenu);
+			this.gameFrame.add(this.level);
+			this.gameFrame.revalidate();
+			this.gameFrame.repaint();
+			this.gameFrame.requestFocus();
 			this.timer.restart();
 		}
 		else {
 			this.paused=true;
+			this.gameFrame.remove(this.level);
+			this.gameFrame.add(this.pauseMenu);
+			this.gameFrame.revalidate();
+			this.gameFrame.repaint();
 			this.timer.stop();
 		}
 	}
@@ -106,11 +122,12 @@ public class GameMain {
 		if(this.level.getEnemies().size()==0){
 			this.nextLevel();
 		}
-		if(this.level.getHero().getDie()) {
+		if(this.level.getHero().getDie()){
+			this.level.getHero().setCanAct(true);
 			this.level.reset();
-			this.level.getHero().setLife(this.level.getHero().getLife()-1);
+			this.lives--;
 			this.level.getHero().setDie(false);
-			if(this.level.getHero().getLife()==0){
+			if(this.lives==0){
 				this.gameFrame.getContentPane().removeAll();
 				JPanel homeScreen = new HomeScreen(gameFrame);
 				gameFrame.add(homeScreen,BorderLayout.CENTER);
@@ -127,23 +144,35 @@ public class GameMain {
 	public class GameListener implements ActionListener{
 		
 		private GameMain gameMain;
-		public GameListener(GameMain gameMain) {
+		public GameListener(GameMain gameMain){
 			this.gameMain=gameMain;
 		}
 		
 		@Override
-		public void actionPerformed(ActionEvent arg0) {
+		public void actionPerformed(ActionEvent arg0){
 			this.gameMain.checkCollisons();
 			this.gameMain.update();
 			this.gameMain.draw();
 		}	
 	}
 
-	public Level getLevel() {
+	public Level getLevel(){
 		return this.level;
 	}
 	
-	public int getCurrentLevel() {
+	public int getCurrentLevel(){
 		return this.currentLevel;
+	}
+
+	public int getLives(){
+		return this.lives;
+	}
+	
+	public boolean getPaused(){
+		return this.paused;
+	}
+
+	public GameFrame getGameFrame(){
+		return this.gameFrame;
 	}
 }
