@@ -34,7 +34,7 @@ public class Bubble extends Drawable{
 
 	public Bubble(double x, double y, Color bubbleColor, boolean right, double bubbleSpeed) {
 		super(x, y);
-		this.width=BUBBLEWIDTH;
+		this.width=40;
 		this.filled=false;
 		this.moving=true;
 		this.right=right;
@@ -61,6 +61,9 @@ public class Bubble extends Drawable{
 
 	@Override
 	public void update() {
+		if(this.width<this.BUBBLEWIDTH) {
+			this.width+=2;
+		}
 		if(this.moving==true){
 			if(this.right){
 				this.x+=bubbleSpeed;

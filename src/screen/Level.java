@@ -175,7 +175,7 @@ public class Level extends JPanel{
 		}
 		drawLevelInfo(g2);
 		if(this.hero.getSprite().getCurrentAnimation().equals("die")){
-			g2.setColor(new Color(0,0,0,235));
+			g2.setColor(new Color(0,0,0,200));
 			Rectangle banner= new Rectangle(0,720/2-YOUDIEDBANNERWIDTH/2,1280,YOUDIEDBANNERWIDTH);
 			g2.fill(banner);
 			g2.setFont(new Font("SansSerif",Font.PLAIN,82));

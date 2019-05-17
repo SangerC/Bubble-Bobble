@@ -15,9 +15,9 @@ import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
-
 import javax.swing.JPanel;
 import javax.swing.Timer;
+import screen.EndScreen;
 import screen.GameFrame;
 import screen.HomeScreen;
 import screen.Level;
@@ -75,6 +75,9 @@ public class GameMain {
 			this.currentLevel++;
 			this.endGame();
 			newGame(this.currentLevel);
+		}
+		else{
+			EndScreen endScreen = new EndScreen(this.gameFrame,this.level.getHero().getSprite(),this.score);
 		}
 	}
 	

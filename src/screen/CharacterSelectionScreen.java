@@ -6,9 +6,6 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -17,7 +14,9 @@ import java.util.ArrayList;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 import animations.Sprite;
+import listeners.RepaintComponent;
 import main.GameMain;
 
 /**
@@ -26,22 +25,23 @@ import main.GameMain;
  */
 public class CharacterSelectionScreen extends JPanel {
 
+	private static final int REPAINTDELAY = 16;
+	
 	private Color backgroundColor = Color.DARK_GRAY;
 	private GameFrame gameFrame;
-	private GridBagConstraints c;
 	private ArrayList<Sprite> hero;
+	private Timer repaintTimer;
 			
 	public CharacterSelectionScreen(GameFrame gameFrame){
-		super(new GridBagLayout());
-		this.c = new GridBagConstraints();
-		c.fill=GridBagConstraints.VERTICAL;
 		this.gameFrame=gameFrame;
 		this.hero=new ArrayList<Sprite>();
 		this.hero.add(new Sprite("assests/heroes/adventurer",this,100,100));
 		this.hero.add(new Sprite("assests/heroes/archer",this,100,100));
-		defaultButtonLayout();
 		this.setPreferredSize(new Dimension(1280,720));
 		this.gameFrame.getContentPane().removeAll();
+		defaultButtonLayout();
+		this.repaintTimer=new Timer(REPAINTDELAY,new RepaintComponent(this));
+		this.repaintTimer.restart();
 		this.gameFrame.add(this);
 		this.gameFrame.revalidate();
 		this.gameFrame.repaint();
@@ -58,10 +58,8 @@ public class CharacterSelectionScreen extends JPanel {
 		Sprite nextanimation= this.hero.get(1);
 		
 		selectButton.addActionListener(new SelectListener(this));
-		c.gridx = 0;
-		c.gridy = 1;
-		c.insets = new Insets(300,0,0,0);
-		this.add(selectButton,c);
+		this.repaint();
+		this.revalidate();
 	}
 	@Override
 	public void paintComponent(Graphics g){
@@ -108,6 +106,9 @@ public class CharacterSelectionScreen extends JPanel {
 
 		@Override
 		public void keyPressed(KeyEvent arg0) {
+			if(arg0.getKeyCode()==10){
+				screen.start();
+			}
 			screen.changeSelection();
 		}
 
@@ -125,11 +126,14 @@ public class CharacterSelectionScreen extends JPanel {
 		
 	}
 	public void changeSelection(){
-		System.out.println("awdaw");
 		Sprite temp = this.hero.get(0);
 		this.hero.set(0, this.hero.get(1));
 		this.hero.set(1, temp);
 		this.repaint();
+		this.revalidate();
+	}
+	public void start(){
+		GameMain gameMain = new GameMain(gameFrame, this.getCharacterSelection());
 	}
 	
 }
