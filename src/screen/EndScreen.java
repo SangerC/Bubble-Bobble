@@ -10,6 +10,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 import animations.Sprite;
+import listeners.MainMenuListener;
 import listeners.RepaintComponent;
 
 public class EndScreen extends JPanel{

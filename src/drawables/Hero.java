@@ -146,13 +146,13 @@ public class Hero extends Entity{
 			bill.setDie(true);
 		}
 	}
-	private void die(){
+	private void die(){//call when you want to kill the hero
 		this.sprite.setCurrentAnimation("die");
 		this.vulnerable=false;
 		this.canAct=false;
 		this.keyPressed=0;
 	}
-	private void dieHelper(){
+	private void dieHelper(){//actually kills the hero
 		this.die=true;
 		this.vulnerable=false;
 		this.invulnerableTimer.restart();

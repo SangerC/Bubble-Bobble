@@ -35,18 +35,17 @@ public class GameMain {
 	private Level level;
 	private HeroListener heroListener;
 	private int currentLevel;
-	private boolean paused=false;
+	private boolean paused;
 	private Timer timer;
 	private int lives;
-	private PauseMenu pauseMenu;
 	private String heroFolder;
 	private int score;
 
 	public GameMain(GameFrame gameFrame, String heroFolder) {
 		this.gameFrame=gameFrame;
 		this.lives=STARTINGLIVES;
-		this.pauseMenu = new PauseMenu(this);
 		this.heroFolder=heroFolder;
+		this.paused=false;
 		this.score=0;
 		this.newGame(0);
 	}
@@ -103,7 +102,7 @@ public class GameMain {
 	public void togglePause() {
 		if(this.paused){
 			this.paused=false;
-			this.gameFrame.remove(this.pauseMenu);
+			this.gameFrame.getContentPane().removeAll();
 			this.gameFrame.add(this.level);
 			this.gameFrame.revalidate();
 			this.gameFrame.repaint();
@@ -112,8 +111,8 @@ public class GameMain {
 		}
 		else{
 			this.paused=true;
-			this.gameFrame.remove(this.level);
-			this.gameFrame.add(this.pauseMenu);
+			this.gameFrame.getContentPane().removeAll();
+			this.gameFrame.add(new PauseMenu(this));
 			this.gameFrame.revalidate();
 			this.gameFrame.repaint();
 			this.timer.stop();

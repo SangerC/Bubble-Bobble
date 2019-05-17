@@ -27,6 +27,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
+import listeners.ControlsListener;
 import main.GameMain;
 
 /**

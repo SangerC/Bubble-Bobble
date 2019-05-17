@@ -31,7 +31,7 @@ public abstract class Entity extends Drawable{
 	protected boolean isJumping;
 	protected boolean facingRight;
 	protected boolean vulnerable;
-	protected boolean canAct;
+	protected boolean canAct;//prevents player input used during death animation
 	protected Sprite sprite;
 	protected int height;
 	protected int width;

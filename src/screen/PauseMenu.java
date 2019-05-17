@@ -9,6 +9,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import listeners.ControlsListener;
+import listeners.MainMenuListener;
 import main.GameMain;
 
 /**
@@ -45,7 +47,6 @@ public class PauseMenu extends JPanel{
 			public void actionPerformed(ActionEvent arg0) {
 				System.exit(0);	
 			}
-			
 		});
 		c.gridx = 0;
 		c.gridy = 1;

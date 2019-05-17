@@ -133,7 +133,7 @@ public class Level extends JPanel{
 		this.repaint();
 	}
 	
-	public String readAfter(String line, char marker){
+	public String readAfter(String line, char marker){//returns part of string after first input marker
 		for(int i=0;i<line.length();i++){
 			if(line.charAt(i)==marker){
 				return line.substring(i+1,line.length());
@@ -141,7 +141,7 @@ public class Level extends JPanel{
 		}
 		return null;
 	}
-	public String readParameter(String line, int parameter){
+	public String readParameter(String line, int parameter){//returns desired parameter from a string using standard java instatiation notation
 		for(int i=0;i<line.length();i++){
 			if((line.charAt(i)==','||line.charAt(i)==';'||line.charAt(i)==')')&&parameter==0){
 				return line.substring(0,i);
