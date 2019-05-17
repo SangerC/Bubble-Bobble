@@ -35,8 +35,18 @@ public class PauseMenu extends JPanel{
 	private void defaultButtonLayout(){
 		JButton continueButton = new JButton("Continue");
 		JButton controlsButton = new JButton("Controls");
+		JButton mainMenuButton = new JButton("Main Menu");
+		JButton quitButton = new JButton("Quit");
 		continueButton.addActionListener(new PlayListener(this.gameMain));
 		controlsButton.addActionListener(new ControlsListener(this.gameMain.getGameFrame(),this));
+		mainMenuButton.addActionListener(new MainMenuListener(this.gameMain.getGameFrame()));
+		quitButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				System.exit(0);	
+			}
+			
+		});
 		c.gridx = 0;
 		c.gridy = 1;
 		this.add(continueButton,c);
@@ -44,6 +54,14 @@ public class PauseMenu extends JPanel{
 		c.gridy = 2;
 		c.insets = new Insets(40,0,0,0);
 		this.add(controlsButton,c);
+		c.gridx = 0;
+		c.gridy = 3;
+		c.insets = new Insets(40,0,0,0);
+		this.add(mainMenuButton,c);
+		c.gridx = 0;
+		c.gridy = 4;
+		c.insets = new Insets(40,0,0,0);
+		this.add(quitButton,c);
 	}
 	
 	private class PlayListener implements ActionListener{

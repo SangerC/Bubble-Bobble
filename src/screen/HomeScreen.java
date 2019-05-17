@@ -54,6 +54,7 @@ public class HomeScreen extends JPanel{
 	private void defaultButtonLayout(){
 		JButton playButton = new JButton("Play");
 		JButton controlsButton = new JButton("Controls");
+		JButton quitButton = new JButton("Quit");
 		playButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
@@ -61,6 +62,13 @@ public class HomeScreen extends JPanel{
 			}		
 		});
 		controlsButton.addActionListener(new ControlsListener(this.gameFrame,this));
+		quitButton.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(ActionEvent arg0) {
+				System.exit(0);	
+			}
+			
+		});
 		c.gridx = 0;
 		c.gridy = 1;
 		this.add(playButton,c);
@@ -68,7 +76,10 @@ public class HomeScreen extends JPanel{
 		c.gridy = 2;
 		c.insets = new Insets(40,0,0,0);
 		this.add(controlsButton,c);
-
+		c.gridx = 0;
+		c.gridy = 3;
+		c.insets = new Insets(40,0,0,0);
+		this.add(quitButton,c);
 	}
 	
 	private void makeTitle() {

@@ -51,7 +51,7 @@ public class GameMain {
 
 	public void newGame(int levelNumber) {
 		this.gameFrame.getContentPane().removeAll();
-		this.level=new Level(levelDirectory+"level"+levelNumber+"/level"+levelNumber,this);
+		this.level=new Level(levelDirectory+"level"+levelNumber+"/level"+levelNumber,heroFolder,this);
 		this.level.setPreferredSize(new Dimension(FRAMEXSIZE,FRAMEYSIZE));
 		this.gameFrame.add(this.level,BorderLayout.CENTER);
 		this.currentLevel=levelNumber;
@@ -105,7 +105,7 @@ public class GameMain {
 			this.gameFrame.requestFocus();
 			this.timer.restart();
 		}
-		else {
+		else{
 			this.paused=true;
 			this.gameFrame.remove(this.level);
 			this.gameFrame.add(this.pauseMenu);

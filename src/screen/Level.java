@@ -12,17 +12,18 @@ package screen;
  */
 
 import java.awt.Color;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
+import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.Scanner;
 import javax.swing.JPanel;
-import javax.swing.Timer;
-
 import drawables.Bubble;
 import drawables.Bullet;
 import drawables.Enemy;
@@ -36,6 +37,7 @@ import main.GameMain;
 public class Level extends JPanel{
 
 	private static final int HEROBUBBLEOFFSET = 40;
+	private static final int YOUDIEDBANNERWIDTH = 175;
 	
 	private ArrayList<Enemy> enemies;
 	private ArrayList<Obstacle> obstacles;
@@ -47,11 +49,10 @@ public class Level extends JPanel{
 	private Hero hero;
 	private double heroStartX;
 	private double heroStartY;
-	private boolean youDied;
 	private GameMain gameMain;
 	
 	
-	public Level(String fileName,GameMain gameMain){
+	public Level(String fileName,String HeroFolder,GameMain gameMain){
 		FileReader file=null;
 		this.gameMain=gameMain;
 		try {
@@ -81,7 +82,7 @@ public class Level extends JPanel{
 									 Double.valueOf(readParameter(setting,3)),
 									 Double.valueOf(readParameter(setting,4)),
 									 this,
-									 "assests/heroes/adventurer");
+									 HeroFolder);
 				this.heroStartX= Double.valueOf(readParameter(setting,0));
 				this.heroStartY=Double.valueOf(readParameter(setting,1));
 			}
@@ -173,9 +174,18 @@ public class Level extends JPanel{
 			fill.draw(g2);
 		}
 		drawLevelInfo(g2);
-		if(youDied){
-			g2.setColor(Color.red);
-			g2.drawString("You Died", 800, 500);
+		if(this.hero.getSprite().getCurrentAnimation().equals("die")){
+			g2.setColor(new Color(0,0,0,235));
+			Rectangle banner= new Rectangle(0,720/2-YOUDIEDBANNERWIDTH/2,1280,YOUDIEDBANNERWIDTH);
+			g2.fill(banner);
+			g2.setFont(new Font("SansSerif",Font.PLAIN,82));
+			g2.setColor(Color.RED);
+		    FontMetrics metrics = g2.getFontMetrics(g2.getFont());
+		    // Determine the X coordinate for the text
+		    int x = banner.x + (banner.width - metrics.stringWidth("You Died")) / 2;
+		    // Determine the Y coordinate for the text (note we add the ascent, as in java 2d 0 is top of the screen)
+		    int y = banner.y + ((banner.height - metrics.getHeight()) / 2) + metrics.getAscent();
+		    g2.drawString("You Died", x, y);
 		}
 	}	
 	public Hero getHero(){
