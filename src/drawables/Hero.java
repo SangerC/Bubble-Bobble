@@ -6,9 +6,7 @@ import java.awt.Rectangle;
 import java.awt.geom.Area;
 import java.util.ArrayList;
 import java.util.Random;
-
 import javax.swing.Timer;
-
 import animations.Sprite;
 import screen.Level;
 

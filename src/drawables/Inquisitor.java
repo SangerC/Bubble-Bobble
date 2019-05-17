@@ -5,7 +5,6 @@ import java.awt.Graphics2D;
 import java.awt.geom.Area;
 import java.awt.geom.Ellipse2D;
 import java.util.Random;
-
 import screen.Level;
 
 /*

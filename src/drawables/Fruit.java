@@ -1,14 +1,12 @@
 package drawables;
 
-import java.awt.Color;
+
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.geom.Area;
-import java.awt.geom.Ellipse2D;
 import java.io.File;
 import java.io.IOException;
-
 import javax.imageio.ImageIO;
 import javax.swing.Timer;
 
@@ -44,7 +42,6 @@ public class Fruit extends Entity{
 			this.lowScoreFruit = ImageIO.read(new File(LOWSCOREFRUIT));
 			this.highScoreFruit = ImageIO.read(new File(HIGHSCOREFRUIT));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
