@@ -102,6 +102,7 @@ public abstract class Entity extends Drawable{
 		else if(this.y<-10){
 			this.y=720;
 		}
+		this.updateAnimation();
 	}
 	public boolean getFacingRight() {
 		return this.facingRight;
@@ -178,4 +179,26 @@ public abstract class Entity extends Drawable{
 	public boolean getCanAct() {
 		return this.canAct;
 	}
+	public boolean updateAnimation() {
+		if(this.sprite.getCurrentAnimation().equals("die")) {
+			if(this.sprite.getCurrentAnimationIndex()==this.sprite.getAnimations().get(this.sprite.getCurrentAnimation()).size()-1){
+				this.dieHelper();
+			}
+			return true;
+		}
+		else if(this.sprite.getCurrentAnimation().equals("shootRight")||this.sprite.getCurrentAnimation().equals("shootLeft")){
+			if(this.sprite.getCurrentAnimationIndex()==this.sprite.getAnimations().get(this.sprite.getCurrentAnimation()).size()-1){
+				this.sprite.setCurrentAnimation("idleRight");
+			}
+			return true;
+		}
+		else if(this.sprite.getCurrentAnimation().equals("jump")){
+			if(this.sprite.getCurrentAnimationIndex()==this.sprite.getAnimations().get(this.sprite.getCurrentAnimation()).size()-1){
+				this.sprite.setCurrentAnimation("idleRight");
+			}
+			return true;
+		}
+		return false;
+	}
+	public abstract void dieHelper();
 }

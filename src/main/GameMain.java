@@ -47,7 +47,6 @@ public class GameMain {
 		this.heroFolder=heroFolder;
 		this.paused=false;
 		this.score=0;
-		this.newGame(0);
 	}
 
 	public void newGame(int levelNumber) {
@@ -76,7 +75,7 @@ public class GameMain {
 			newGame(this.currentLevel);
 		}
 		else{
-			EndScreen endScreen = new EndScreen(this.gameFrame,this.level.getHero().getSprite(),this.score);
+			EndScreen endScreen = new EndScreen(this,this.level.getHero().getSprite(),this.score);
 		}
 	}
 	
@@ -136,11 +135,7 @@ public class GameMain {
 			this.lives--;
 			this.level.getHero().setDie(false);
 			if(this.lives==0){
-				this.gameFrame.getContentPane().removeAll();
-				JPanel homeScreen = new HomeScreen(gameFrame);
-				gameFrame.add(homeScreen,BorderLayout.CENTER);
-				gameFrame.revalidate();
-				gameFrame.repaint();
+				this.stop();
 			}
 		}
 	}	
@@ -186,5 +181,14 @@ public class GameMain {
 
 	public int getScore() {
 		return this.score;
+	}
+
+	public void stop() {
+		this.gameFrame.getContentPane().removeAll();
+		JPanel homeScreen = new HomeScreen(gameFrame);
+		gameFrame.add(homeScreen,BorderLayout.CENTER);
+		gameFrame.revalidate();
+		gameFrame.repaint();
+		this.timer.stop();
 	}
 }

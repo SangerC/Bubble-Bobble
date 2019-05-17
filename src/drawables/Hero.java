@@ -59,23 +59,9 @@ public class Hero extends Entity{
 		super.update();
 		this.updateAnimation();
 	}
-	private void updateAnimation(){
-		if(this.sprite.getCurrentAnimation().equals("die")) {
-			if(this.sprite.getCurrentAnimationIndex()==this.sprite.getAnimations().get(this.sprite.getCurrentAnimation()).size()-1){
-				this.dieHelper();
-			}
-		}
-		else if(this.sprite.getCurrentAnimation().equals("shootRight")||this.sprite.getCurrentAnimation().equals("shootLeft")){
-				if(this.sprite.getCurrentAnimationIndex()==this.sprite.getAnimations().get(this.sprite.getCurrentAnimation()).size()-1){
-					this.sprite.setCurrentAnimation("idleRight");
-				}
-		}
-		else if(this.sprite.getCurrentAnimation().equals("jump")){
-				if(this.sprite.getCurrentAnimationIndex()==this.sprite.getAnimations().get(this.sprite.getCurrentAnimation()).size()-1){
-					this.sprite.setCurrentAnimation("idleRight");
-				}
-		}
-		else{
+	@Override
+	public boolean updateAnimation(){
+		if(!super.updateAnimation()) {
 			if(this.isFalling&&this.sprite.getCurrentAnimation()!="fall") {
 				this.sprite.setCurrentAnimation("fall");
 			}
@@ -96,6 +82,7 @@ public class Hero extends Entity{
 				}
 			}
 		}
+		return true;
 	}
 	public void setKeyPressed(int keyCode) {
 		this.keyPressed=keyCode;
@@ -150,7 +137,7 @@ public class Hero extends Entity{
 		this.canAct=false;
 		this.keyPressed=0;
 	}
-	private void dieHelper(){//actually kills the hero
+	public void dieHelper(){//actually kills the hero
 		this.die=true;
 		this.vulnerable=false;
 		this.invulnerableTimer.restart();

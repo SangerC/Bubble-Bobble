@@ -12,6 +12,7 @@ import javax.swing.Timer;
 import animations.Sprite;
 import listeners.MainMenuListener;
 import listeners.RepaintComponent;
+import main.GameMain;
 
 public class EndScreen extends JPanel{
 
@@ -23,8 +24,8 @@ public class EndScreen extends JPanel{
 	private int score;
 	private Timer repaintTimer;
 			
-	public EndScreen(GameFrame gameFrame,Sprite hero, int score){
-		this.gameFrame=gameFrame;
+	public EndScreen(GameMain gameMain, Sprite hero, int score){
+		this.gameFrame=gameMain.getGameFrame();
 		this.hero=hero;
 		this.setPreferredSize(new Dimension(1280,720));
 		this.gameFrame.getContentPane().removeAll();
@@ -33,7 +34,7 @@ public class EndScreen extends JPanel{
 		this.setBackground(backgroundColor);
 		JButton selectButton = new JButton("Main Menu");
 		gameFrame.add(selectButton, BorderLayout.SOUTH);
-		selectButton.addActionListener(new MainMenuListener(gameFrame));
+		selectButton.addActionListener(new MainMenuListener(gameMain));
 		this.repaintTimer=new Timer(REPAINTDELAY,new RepaintComponent(this));
 		this.repaintTimer.restart();
 		this.gameFrame.revalidate();

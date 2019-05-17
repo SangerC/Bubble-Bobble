@@ -41,7 +41,7 @@ public class PauseMenu extends JPanel{
 		JButton quitButton = new JButton("Quit");
 		continueButton.addActionListener(new PlayListener(this.gameMain));
 		controlsButton.addActionListener(new ControlsListener(this.gameMain.getGameFrame(),this));
-		mainMenuButton.addActionListener(new MainMenuListener(this.gameMain.getGameFrame()));
+		mainMenuButton.addActionListener(new MainMenuListener(this.gameMain));
 		quitButton.addActionListener(new ActionListener() {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {

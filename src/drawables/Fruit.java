@@ -47,6 +47,16 @@ public class Fruit extends Entity{
 	}
 
 	@Override
+	public void update() {
+		if(isFalling){
+			this.y+=this.fallSpeed;
+		}
+		if(isJumping) {
+			this.y-=this.jumpSpeed;
+		}
+	}
+	
+	@Override
 	public void draw(Graphics2D g2) {
 		g2.translate(this.x, this.y-this.height/8);
 		if(this.score>800) {
@@ -64,6 +74,11 @@ public class Fruit extends Entity{
 	
 	public Area getArea(){
 		return new Area(new Rectangle((int)this.x,(int)this.y,this.width,this.height));
+	}
+
+	@Override
+	public void dieHelper() {
+		
 	}
 	
 }

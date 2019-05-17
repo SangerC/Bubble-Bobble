@@ -6,7 +6,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Area;
 import java.awt.geom.Ellipse2D;
-
 import javax.swing.Timer;
 
 /**
@@ -20,7 +19,7 @@ public class Bubble extends Drawable{
 	private static final double BUBBLEWIDTH=70;
 	private static final double BUBBLEFLOATSPEED=2;
 	private static final int MOVEDELAY=500;
-	private static final int POPDELAY=7000;
+	private static final int POPDELAY=5000;
 	
 	private double width;
 	private double bubbleSpeed;

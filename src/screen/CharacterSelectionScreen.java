@@ -29,6 +29,7 @@ public class CharacterSelectionScreen extends JPanel {
 	
 	private Color backgroundColor = Color.DARK_GRAY;
 	private GameFrame gameFrame;
+	private GameMain gameMain;
 	private ArrayList<Sprite> hero;
 	private Timer repaintTimer;
 			
@@ -53,10 +54,6 @@ public class CharacterSelectionScreen extends JPanel {
 	private void defaultButtonLayout(){
 		JButton selectButton = new JButton("Select Character and Begin");
 		gameFrame.add(selectButton, BorderLayout.SOUTH);
-		Sprite mainanimation= this.hero.get(0);
-		Sprite previousanimation;
-		Sprite nextanimation= this.hero.get(1);
-		
 		selectButton.addActionListener(new SelectListener(this));
 		this.repaint();
 		this.revalidate();
@@ -92,7 +89,7 @@ public class CharacterSelectionScreen extends JPanel {
 		
 		@Override
 		public void actionPerformed(ActionEvent arg0) {
-			GameMain gameMain = new GameMain(gameFrame, this.screen.getCharacterSelection());
+			screen.start();
 		}
 		
 	}
@@ -133,7 +130,8 @@ public class CharacterSelectionScreen extends JPanel {
 		this.revalidate();
 	}
 	public void start(){
-		GameMain gameMain = new GameMain(gameFrame, this.getCharacterSelection());
+		this.gameMain = new GameMain(gameFrame, this.getCharacterSelection());
+		this.gameMain.newGame(0);
 	}
 	
 }

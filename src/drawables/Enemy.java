@@ -1,7 +1,9 @@
 package drawables;
 
+import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.Area;
 import java.util.Random;
 import javax.swing.Timer;
 import screen.Level;
@@ -28,12 +30,12 @@ public abstract class Enemy extends Entity{
 	private Timer bubbleTimer;
 	private boolean moveChange;
 	protected Level level;
-	private Bubble bubble;
+	protected Bubble bubble;
 
 	public Enemy(double x, double y, double speed, double fallSpeed, double jumpSpeed, Level level) {
 		super(x, y, speed, fallSpeed, jumpSpeed);
-		this.height=40;
-		this.width=20;
+		this.height=50;
+		this.width=50;
 		this.moveChange=true;
 		this.moveTimer=new Timer(MOVEDELAY,new MoveListener(this));
 		this.bubbleTimer=new Timer(BUBBLEDELAY,new BubbleListener(this));
@@ -72,7 +74,7 @@ public abstract class Enemy extends Entity{
 			this.x=this.bubble.getX()+this.bubble.getWidth()/2-this.width/2;
 			this.y=this.bubble.getY()+this.bubble.getWidth()/2-this.height/2;
 		}
-		
+		this.updateAnimation();
 	}
 	
 	public void checkCollision(Bubble bubble){
@@ -111,7 +113,6 @@ public abstract class Enemy extends Entity{
 		public void actionPerformed(ActionEvent arg0) {
 			this.enemy.freeFromBubble();
 		}
-		
 	}
 
 	public void allowMoveChange() {
@@ -121,6 +122,10 @@ public abstract class Enemy extends Entity{
 	
 	public Bubble getBubble() {
 		return this.bubble;
+	}
+	
+	public Area getArea() {
+		return new Area(new Rectangle((int)this.x+this.width/4,(int)this.y+this.height/8,this.width-this.width/2,this.height-this.height/8));
 	}
 	
 	public void freeFromBubble(){
@@ -136,5 +141,25 @@ public abstract class Enemy extends Entity{
 		Random rand = new Random(); 
 		this.level.addFruit(new Fruit(this.x,this.y,0,3,0,rand.nextInt(900)+100));
 		this.die=true;
+	}
+	public void dieHelper() {
+		this.die();
+	}
+	@Override
+	public boolean updateAnimation(){
+		if(!super.updateAnimation()) {
+			if(this.isFalling && this.sprite.getCurrentAnimation() != "fall") {
+				this.sprite.setCurrentAnimation("fall");
+			}
+			else{
+				if(this.facingRight && this.sprite.getCurrentAnimation() != "runRight" && !this.isFalling) {
+					this.sprite.setCurrentAnimation("runRight");
+				} 
+				else if(!this.facingRight && this.sprite.getCurrentAnimation() != "runLeft" && !this.isFalling) {
+					this.sprite.setCurrentAnimation("runLeft");
+				}
+			}
+		}
+		return true;
 	}
 }
