@@ -126,7 +126,7 @@ public class GameMain {
 		this.level.update();
 		this.score+=this.level.getHero().getScore();
 		this.level.getHero().setScore(0);
-		if(this.level.getEnemies().size()==0){
+		if(this.level.getEnemies().size()==0&&this.level.getFruits().size()==0){
 			this.nextLevel();
 		}
 		if(this.level.getHero().getDie()){
@@ -184,7 +184,9 @@ public class GameMain {
 	}
 
 	public void stop() {
-		this.gameFrame.getContentPane().removeAll();
+		this.gameFrame.dispose();
+		GameFrame gameFrame = new GameFrame();
+		gameFrame.getContentPane().removeAll();
 		JPanel homeScreen = new HomeScreen(gameFrame);
 		gameFrame.add(homeScreen,BorderLayout.CENTER);
 		gameFrame.revalidate();

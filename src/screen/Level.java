@@ -281,7 +281,9 @@ public class Level extends JPanel{
 	public ArrayList<Enemy> getEnemies(){
 		return this.enemies;
 	}
-
+	public ArrayList<Fruit> getFruits(){
+		return this.fruits;
+	}
 	public void reset(){
 		this.hero.move(this.heroStartX, this.heroStartY);
 	}
