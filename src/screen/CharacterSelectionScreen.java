@@ -14,11 +14,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.ArrayList;
-import java.util.HashMap;
-
 import javax.swing.JButton;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import animations.Sprite;
 import main.GameMain;
@@ -33,7 +30,6 @@ public class CharacterSelectionScreen extends JPanel {
 	private GameFrame gameFrame;
 	private GridBagConstraints c;
 	private ArrayList<Sprite> hero;
-	private int currentHeroIndex;
 			
 	public CharacterSelectionScreen(GameFrame gameFrame){
 		super(new GridBagLayout());
@@ -41,7 +37,6 @@ public class CharacterSelectionScreen extends JPanel {
 		c.fill=GridBagConstraints.VERTICAL;
 		this.gameFrame=gameFrame;
 		this.hero=new ArrayList<Sprite>();
-		this.currentHeroIndex=0;
 		this.hero.add(new Sprite("assests/heroes/adventurer",this,100,100));
 		this.hero.add(new Sprite("assests/heroes/archer",this,100,100));
 		defaultButtonLayout();
@@ -51,6 +46,7 @@ public class CharacterSelectionScreen extends JPanel {
 		this.gameFrame.revalidate();
 		this.gameFrame.repaint();
 		this.gameFrame.requestFocus();
+		this.gameFrame.addKeyListener(new CharacterSelectionListener(this));
 		this.setBackground(backgroundColor);
 		makeTitle();
 	}
@@ -86,7 +82,7 @@ public class CharacterSelectionScreen extends JPanel {
 		gameFrame.add(title,BorderLayout.NORTH);
 	}
 	public String getCharacterSelection() {
-		return this.hero.get(currentHeroIndex).getFolderName();
+		return this.hero.get(0).getFolderName();
 	}
 	private class SelectListener implements ActionListener{
 		
@@ -129,8 +125,11 @@ public class CharacterSelectionScreen extends JPanel {
 		
 	}
 	public void changeSelection(){
+		System.out.println("awdaw");
 		Sprite temp = this.hero.get(0);
-		
+		this.hero.set(0, this.hero.get(1));
+		this.hero.set(1, temp);
+		this.repaint();
 	}
 	
 }

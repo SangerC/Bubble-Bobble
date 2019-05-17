@@ -287,6 +287,6 @@ public class Level extends JPanel{
 	}
 	private void drawLevelInfo(Graphics2D g2){
 		g2.setColor(Color.black);
-		g2.drawString("Level: "+this.gameMain.getCurrentLevel()+"        Score: "+this.hero.getScore()+"        Lives:"+this.gameMain.getLives(), 10, 30);
+		g2.drawString("Level: "+this.gameMain.getCurrentLevel()+"        Score: "+this.gameMain.getScore()+"        Lives:"+this.gameMain.getLives(), 10, 30);
 	}
 }
