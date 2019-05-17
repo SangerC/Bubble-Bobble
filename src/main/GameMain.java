@@ -40,12 +40,14 @@ public class GameMain {
 	private int lives;
 	private PauseMenu pauseMenu;
 	private String heroFolder;
+	private int score;
 
 	public GameMain(GameFrame gameFrame, String heroFolder) {
 		this.gameFrame=gameFrame;
 		this.lives=STARTINGLIVES;
 		this.pauseMenu = new PauseMenu(this);
 		this.heroFolder=heroFolder;
+		this.score=0;
 		this.newGame(0);
 	}
 
@@ -121,6 +123,8 @@ public class GameMain {
 	
 	public void update() {
 		this.level.update();
+		this.score+=this.level.getHero().getScore();
+		this.level.getHero().setScore(0);
 		if(this.level.getEnemies().size()==0){
 			this.nextLevel();
 		}
@@ -176,5 +180,9 @@ public class GameMain {
 
 	public GameFrame getGameFrame(){
 		return this.gameFrame;
+	}
+
+	public int getScore() {
+		return this.score;
 	}
 }

@@ -34,7 +34,7 @@ public class Hero extends Entity{
 	public Hero(double x, double y, double speed, double fallSpeed, double jumpSpeed, Level level, String animationFolder) {
 		super(x, y, speed, fallSpeed, jumpSpeed);
 		this.height = 75;
-		this.width =75;
+		this.width = 75;
 		this.invulnerableTimer=new Timer(INVULNERABILITYDELAY, new InvulnerabilityListener(this));
 		this.sprite=new Sprite(animationFolder,level, this.width, this.height);
 		this.canAct=true;
@@ -166,5 +166,8 @@ public class Hero extends Entity{
 	}
 	public Sprite getSprite() {
 		return this.sprite;
+	}
+	public void setScore(int score) {
+		this.score=score;
 	}
 }
