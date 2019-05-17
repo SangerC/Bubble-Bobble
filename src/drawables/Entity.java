@@ -11,7 +11,7 @@ import animations.Sprite;
 /**
  * The character creation class for the arcade game.
  * 
- * Creates a specific Drawable called Character which is an abstract class that provides
+ * Creates a specific Drawable called Entity which is an abstract class that provides
  * methods for moving objects on the screen
  * 
  *

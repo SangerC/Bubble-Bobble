@@ -8,6 +8,10 @@ import java.util.Random;
 
 import screen.Level;
 
+/*
+ * Class that provides methods for the specific type of Enemy, Enoth, which 
+ * moves across the screen and uses computer generated movement and is the enemy that does not shoot bullets
+ */
 public class Inquisitor extends Enemy{
 
 	public Inquisitor(double x, double y, double speed, double fallSpeed, double jumpSpeed, Level level) {

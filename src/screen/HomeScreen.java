@@ -29,7 +29,11 @@ import javax.swing.SwingConstants;
 
 import main.GameMain;
 
-
+/**
+ * Class that handles the creation and layout of the home screen
+ * 
+ *
+ */
 public class HomeScreen extends JPanel{
 	
 	private Color backgroundColor = Color.DARK_GRAY;

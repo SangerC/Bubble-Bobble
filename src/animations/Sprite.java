@@ -13,6 +13,10 @@ import javax.imageio.ImageIO;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+/**
+ * Class that handles character Sprite's animation
+ *
+ */
 public class Sprite {
 	
 	private static final int UPDATEDELAY=100;

@@ -10,7 +10,10 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import main.GameMain;
-
+/**
+ * Class that handles the control menu layout
+ *
+ */
 public class ControlsMenu extends JPanel{
 
 	private Color backgroundColor = Color.DARK_GRAY;

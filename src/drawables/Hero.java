@@ -12,6 +12,16 @@ import javax.swing.Timer;
 import animations.Sprite;
 import screen.Level;
 
+/**
+ * The Hero class for the arcade game.
+ * 
+ *  Class that creates, updates and handles hero functions in the game
+ * 
+ * 
+ * 
+ * @author Cullen LaKemper and Tim Wilson
+ *
+ */
 public class Hero extends Entity{
 	
 	protected static final int INVULNERABILITYDELAY = 2000;

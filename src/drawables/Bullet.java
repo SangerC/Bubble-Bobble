@@ -5,6 +5,12 @@ import java.awt.Graphics2D;
 import java.awt.geom.Area;
 import java.awt.geom.Ellipse2D;
 
+/**
+ * 
+ *  Class that creates, updates and handles bullet functions in the game
+ * 
+ *
+ */
 public class Bullet extends Drawable{
 
 	private Color color;
