@@ -19,6 +19,10 @@ import javax.swing.JPanel;
 import animations.Sprite;
 import main.GameMain;
 
+/**
+ * Class that handles the character selection screen layout and functions
+ *
+ */
 public class CharacterSelectionScreen extends JPanel {
 
 	

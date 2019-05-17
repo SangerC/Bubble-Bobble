@@ -9,6 +9,12 @@ import java.awt.geom.Ellipse2D;
 
 import javax.swing.Timer;
 
+/**
+ * 
+ *  Class that creates, updates and handles bubble functions in the game
+ * 
+ *
+ */
 public class Bubble extends Drawable{
 	
 	private static final double BUBBLEWIDTH=70;

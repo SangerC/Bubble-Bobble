@@ -11,7 +11,11 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 import main.GameMain;
 
-
+/**
+ * Class that handles the pause menu layout and functions
+ * 
+ *
+ */
 public class PauseMenu extends JPanel{
 	
 	private Color backgroundColor = Color.DARK_GRAY;

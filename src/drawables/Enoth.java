@@ -5,9 +5,19 @@ import java.awt.Graphics2D;
 import java.awt.geom.Area;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Ellipse2D.Double;
-
 import screen.Level;
 
+/**
+ * A specific type of enemy class for the arcade game.
+ * 
+ * Class that provides methods for the specific type of Enemy, Enoth, which 
+ * moves across the screen and uses computer generated movement and is the enemy that does not shoot bullets
+ * 
+ * 
+ * 
+ * @author Cullen LaKemper and Tim Wilson
+ *
+ */
 public class Enoth extends Enemy{
 
 	public Enoth(double x, double y, double speed, double fallSpeed, double jumpSpeed, Level level){

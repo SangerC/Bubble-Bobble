@@ -5,6 +5,10 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JPanel;
 
+/**
+ * Class that handles when the control menu button is pressed
+ * 
+ */
 public class ControlsListener implements ActionListener{
 	
 	private GameFrame gameFrame;

@@ -5,6 +5,16 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
 
+/**
+ * The Bubble class for the arcade game.
+ * 
+ *  Class that creates, updates and handles Obstacle functions in the game
+ * and is a type of drawable
+ * 
+ * 
+ * @author Cullen LaKemper and Tim Wilson
+ *
+ */
 public class Obstacle extends Drawable{
 	
 	private int height;

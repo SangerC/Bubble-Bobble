@@ -8,6 +8,16 @@ import java.awt.geom.Ellipse2D;
 
 import javax.swing.Timer;
 
+/**
+ * The Fruit class for the arcade game.
+ * 
+ *  Class that creates, updates and handles fruit functions in the game
+ * 
+ * 
+ * 
+ * @author Cullen LaKemper and Tim Wilson
+ *
+ */
 public class Fruit extends Entity{
 	
 	private int score;
